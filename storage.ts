@@ -2,7 +2,7 @@
 // to compile: /usr/local/share/npm/bin/tsc --module node storage.ts
 // do this and use storage.js as a module
 // the inheritance is nice
-interface Article {
+export interface Article {
 	// some identifier that uniquely matches this article in the queue
 	id            : number;
 
@@ -21,7 +21,7 @@ interface Article {
 
 // implements a circular queue and article storage
 // must persist across each run
-interface ArticleQueue {
+export interface ArticleQueue {
 	// add an Article to the queue
 	enqueue(article : Article) : void;
 
@@ -46,7 +46,7 @@ interface ArticleQueue {
 }
 
 
-class jsonQueue implements ArticleQueue {
+export class jsonQueue implements ArticleQueue {
 	// add an Article to the queue
 	enqueue(article : Article) : void{}
 
