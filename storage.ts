@@ -1,3 +1,7 @@
+// interfaces written in typescript which is too much of a pain to use with nodejs at the moment
+// to compile: /usr/local/share/npm/bin/tsc --module node storage.ts
+// do this and use storage.js as a module
+// the inheritance is nice
 interface Article {
 	// some identifier that uniquely matches this article in the queue
 	id            : number;
@@ -21,7 +25,7 @@ interface Storage {
 	enqueue(article : Article) : void;
 
 	// return an article from the queue
-	next(void) : void;
+	next() : void;
 
 	// remove an article from the queue
 	discard(id :number) : void;
@@ -41,6 +45,4 @@ interface Storage {
 }
 
 
-class jsonStorage implements Storage {
-
-}
+//export class jsonStorage implements Storage { }
