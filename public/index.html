@@ -3,21 +3,45 @@
 		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<style>
 			body {
-				background:#FFFFF5;
+				font-family:sans-serif;
 			}
 			article {
 				border:1px solid gray;
-				margin:40px;
+				margin:40px 100px 40px 20px;
 				padding: 30px;
 				box-shadow:2px 2px 1px gray;
 				background:white;
 				max-width:800px;
+			}
+			nav {
+				position:fixed;
+				right:0;
+				width:80px;
+				background:black;
+				color:white;
+				top:0;
+				bottom:0;
+				text-align:center;
+			}
+			nav ul, nav li {
+				list-style-type:none;
+				padding:0;
+				margin:20px 0 20px 0;
+			}
+			nav i {
+				font-size:36px;
+				display:block!important;
+				margin:auto;
+			}
+			nav #pending {
+				font-size:36px;
 			}
 		</style>
 	</head>
 	<body>
 		<article>This is an article</article>
 		<nav>
+			<div id="pending">999</div>
 			<ul>
 				<li><i class="icon-double-angle-right"></i>Skip</li>
 				<li><i class="icon-trash"></i>Discard</li>
