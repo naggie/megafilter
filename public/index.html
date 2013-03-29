@@ -27,7 +27,7 @@
 			nav ul, nav li {
 				list-style-type:none;
 				padding:0;
-				margin:30px 0 10px 0;
+				margin:20px 0 20px 0;
 				padding:10px 0 10px 0;
 			}
 			nav li:hover {
@@ -45,6 +45,13 @@
 			nav #pending {
 				font-size:36px;
 			}
+			nav li.disabled {
+				opacity:0.30;
+			}
+			nav li.disabled:active, nav li.disabled:hover {
+				position:inherit;
+				background:inherit;
+			}
 		</style>
 	</head>
 	<body>
@@ -56,7 +63,7 @@
 				<li><i class="icon-trash"></i>Discard</li>
 				<li><i class="icon-eye-open"></i>Inspect</li>
 				<li><i class="icon-cloud-upload"></i>Publish</li>
-				<li><i class="icon-undo"></i>Undo</li>
+				<li class="disabled"><i class="icon-undo"></i>Undo</li>
 			</ul>
 		</nav>
 	</body>
