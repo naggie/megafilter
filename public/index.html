@@ -15,6 +15,11 @@
 			}
 			article img {
 				max-width:100%;
+				height:inherit;
+				text-align:center;
+				float:none;
+				display:block;
+				margin:40px auto;
 			}
 			nav {
 				position:fixed;
@@ -68,11 +73,12 @@
 				max-width:800px;
 				background:url('loading.gif') no-repeat center;
 				height:100%;
+				z-index:-999;
 			}
 		</style>
 	</head>
 	<body>
-		<article>This is an article</article>
+		<article>This is an article <br><img src="http://callanbryant.co.uk/blog/images/homebrew.png" /></article>
 		<nav>
 			<div id="pending">999</div>
 			<ul>
