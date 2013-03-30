@@ -1,3 +1,6 @@
 [submodule "public/font-awesome"]
 	path = public/font-awesome
 	url = https://github.com/FortAwesome/Font-Awesome.git
+[submodule "public/backbone"]
+	path = public/backbone
+	url = https://github.com/documentcloud/backbone.git
