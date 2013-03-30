@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<title>Megafilter</title>
 		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<style>
 			body {
@@ -141,12 +142,12 @@ command line client can also search.</p>
 		</article>
 		<nav>
 			<ul>
-				<li id="pending">999</li>
-				<li><i class="icon-double-angle-right"></i>Skip</li>
-				<li><i class="icon-trash"></i>Discard</li>
-				<li><i class="icon-eye-open"></i>Inspect</li>
-				<li><i class="icon-cloud-upload"></i>Publish</li>
-				<li class="disabled"><i class="icon-undo"></i>Undo</li>
+				<li id="pending" title="Number of articles waiting in the queue">999</li>
+				<li><i class="icon-double-angle-right" title="Deal with this article later"></i>Skip</li>
+				<li><i class="icon-trash" title="Remove this article from the queue"></i>Discard</li>
+				<li><i class="icon-eye-open" title="View on original website"></i>Inspect</li>
+				<li><i class="icon-cloud-upload" title="Publish to star feed"></i>Publish</li>
+				<li class="disabled"><i class="icon-undo" title="Undo last action"></i>Undo</li>
 			</ul>
 		</nav>
 		<div id="loading"></div>
