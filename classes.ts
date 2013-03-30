@@ -1,4 +1,5 @@
-// interfaces written in typescript which is too much of a pain to use with nodejs at the moment
+// USE AS A REFERENCE. IMPLEMENTATION IS NOT WORTH IT.
+// interfaces written in typescript; too much of a pain to use with nodejs at the moment
 // to compile: /usr/local/share/npm/bin/tsc --comments --module node storage.ts
 // do this and use storage.js as a module
 // the inheritance is nice
