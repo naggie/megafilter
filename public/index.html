@@ -75,10 +75,59 @@
 				height:100%;
 				z-index:-999;
 			}
+			a {
+				color:#84bc2b;
+				text-decoration:none;
+			}
+
+			article time, .note {
+				color:gray;
+				vertical-align:middle;
+				font-style:italic;
+				font-weight:normal;
+				font-size:12px;
+			}
+
+			article time {
+				margin-left:22px;
+			}
+
 		</style>
 	</head>
 	<body>
-		<article>This is an article <br><img src="http://callanbryant.co.uk/blog/images/homebrew.png" /></article>
+		<article>
+
+
+
+
+
+<h1><a target="_new" href="http://feedproxy.google.com/~r/hackaday/LgoM/~3/xttzD3XBtY8/">AVR VGA generator</a> &raquo;<time datetime="Fri, 29 Mar 2013 12:01:37 -0700">2 hours ago</time><span class="note"> by Mike Szczys</span></h1>
+
+
+
+<p><img src="http://callanbryant.co.uk/blog/images/homebrew.png" alt="homebrew" title=""></p>
+
+<p>Learning from other package managers such as macports, apt and pacman, homebrew
+uses the power of git and ruby to create a really lightweight yet customisable
+and community oriented system.</p>
+
+<p>It is powered completely by git for the packages. This means that anyone can
+add a package to the main repository via a pull request on github. As a result,
+maintenance os fast!</p>
+
+<p>Packages are simple ruby class definition files. They rely on external tar
+archives when compiled from source, and can also install from checksum'd binary
+files. Tests are included as a requirement.</p>
+
+<p><a href="http://braumeister.org/">Braumeister</a> is a great online package search system. As a alternative, the
+command line client can also search.</p>
+
+
+
+
+
+
+		</article>
 		<nav>
 			<div id="pending">999</div>
 			<ul>
