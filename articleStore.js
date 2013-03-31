@@ -17,19 +17,28 @@ var json  = function (params) {
 	// articles saved
 	var articles = []
 
+	// change since last write?
+	var changed = false
+
 	// load starred items JSON file
 	if (fs.existsSync(file))
 		articles = JSON.parse( fs.readFileSync(file,{encoding:'utf8'}) )
 
 	// save it every 5 minutes or so IF CHANGED
-	setTimeout(function(){
+	setTimeout(function() {
+		if (!changed) return;
+		changed = false;
+
 		var json = JSON.stringify(articles)
-		fs.writeFile(file,json,{encoding:'utf8'},function(){})
+		fs.writeFile(file,json,{encoding:'utf8'},function(){
+			console.log('Saved '+articles.length+' starred items')
+		})
 	}, saveInterval*1000)
 
 	// save an article
-	this.save(article) {
+	this.save = function(article) {
 		articles.push(article)
+		changed = true
 	}
 
 	// dump n latest articles (0 for all)
