@@ -1,9 +1,9 @@
 // article (circular) queue actors.
 crypto = require('crypto')
 
-exports.js    = function(params) {return new js(params)}
-exports.redis = function(params) {return new redis(params)}
-var js  = function (params) {
+exports.internal = function(params) {return new internal(params)}
+exports.redis    = function(params) {return new redis(params)}
+var internal = function (params) {
 	if (typeof params == 'undefined')
 		params = {}
 
@@ -53,7 +53,6 @@ var js  = function (params) {
 
 		// remove the article, returning if exists
 		return articles.splice(i)[0]
-
 	}
 
 	// number of articles in queue

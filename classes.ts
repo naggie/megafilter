@@ -19,7 +19,7 @@ export interface Article {
 	// URL to article on the web
 	link          : string;
 }
-
+/*
 // implements a circular queue and article storage
 // must persist across each run
 export interface ArticleQueue {
@@ -84,3 +84,4 @@ export class jsonArticleQueue implements ArticleQueue {
 
 
 }
+*/
