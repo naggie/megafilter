@@ -11,7 +11,7 @@ var internal = function (params) {
 		params = {}
 
 	// max number or articles in this queue
-	max = params.max | 999;
+	var max = params.max | 999;
 
 	// current array index of article
 	var index = 0;
