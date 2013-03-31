@@ -20,7 +20,7 @@ Discard an article from the queue. Returns `pending` count.
 Publish an article by ID from the queue (removing it). Returns `pending` count.
 
 > `GET /articles`
-Given a `count` as parameter, return published articles.
+Given a `count` as parameter, return published articles. 0 Means all articles, unspecified  means 30.
 
 
 Article format
