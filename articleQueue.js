@@ -42,6 +42,11 @@ var internal = function (params) {
 			return articles[index = 0]
 	}
 
+	// return the current article without advancing the index
+	this.current = function() {
+		return article[index]
+	}
+
 	// remove an article from the queue, preserving the order
 	this.extract = function(id){
 		// look for the article index, given the ID
