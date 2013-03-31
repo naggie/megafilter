@@ -13,8 +13,11 @@ Get the next article. Returns `article` and `pending` count.
 > `GET /current`
 Get the current article (good for first load) returns `article` and `pending` count.
 
-> `DELETE /:id`
+> `DELETE /article/:id`
 Discard an article from the queue. Returns `pending` count.
 
-> `POST /:id`
+> `POST /article/:id`
 Publish an article by ID from the queue (removing it). Returns `pending` count.
+
+> `GET /articles`
+Given a `count` as parameter, return published articles.

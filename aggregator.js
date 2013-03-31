@@ -7,13 +7,20 @@ store  = require('./articleStorage')[config.store]
 // TODO: return pending count somehow (maybe attach to article)
 
 // TODO: 404
-exports.current = queue.current
-exports.next    = queue.next
-exports.dump    = store.dump
-
-exports.publish = function() {
-
+exports.current = function() {
+	return {
+		pending: queue.pending(),
+		article: queue.next()
+	}
 }
+
+exports.next    = function() {
+	return {
+		pending: queue.pending(),
+		article: queue.current()
+	}
+}
+exports.dump    = store.dump
 
 // TODO: 404
 exports.discard = function(id) {
