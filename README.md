@@ -21,3 +21,22 @@ Publish an article by ID from the queue (removing it). Returns `pending` count.
 
 > `GET /articles`
 Given a `count` as parameter, return published articles.
+
+
+Article format
+--------------
+
+	// some identifier that uniquely matches this article in the queue
+	id            : number;
+
+	publishedDate : Date;
+	title         : string;
+
+	// HTML content
+	content       : string;
+
+	// name/email of original author
+	author        : string;
+
+	// URL to article on the web
+	link          : string;
