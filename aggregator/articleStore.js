@@ -9,7 +9,7 @@ var json  = function (params) {
 		params = {}
 
 	// file to save/load
-	var file = params.file | __dirname+'/starred.json';
+	var file = params.file | __dirname+'/../starred.json';
 
 	// save interval, default 5mins, in seconds
 	var saveInterval = params.saveInterval | 60*5
