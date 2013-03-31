@@ -3,6 +3,9 @@ crypto = require('crypto')
 
 exports.internal = function(params) {return new internal(params)}
 exports.redis    = function(params) {return new redis(params)}
+
+// native, non-persistent, may be slow compared to redis
+// relies on garbage collector, don't overuse
 var internal = function (params) {
 	if (typeof params == 'undefined')
 		params = {}
