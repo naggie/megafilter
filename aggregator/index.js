@@ -1,7 +1,9 @@
 config = require('./config')
 
-queue  = require('./articleQueue')[config.queue]
-store  = require('./articleStorage')[config.store]
+
+// load chosen actors
+queue  = new require('./articleQueue')[config.queue](config)
+store  = new require('./articleStorage')[config.store](config)
 
 
 // TODO: return pending count somehow (maybe attach to article)

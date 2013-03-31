@@ -1,5 +1,10 @@
 var restify = require('restify')
 
+var config = require('./config')
+
+var aggregator = require('./aggregator')
+
+
 var server = restify.createServer({
 	name: 'megafilter',
 	//certificate:'string',
@@ -23,6 +28,6 @@ server.get(/.*/,restify.serveStatic({
 	//maxAge:3600,
 }))
 
-server.listen(8080, function () {
+server.listen(process.env.PORT | 8080, function () {
 	console.log('%s listening at %s', server.name, server.url)
 })
