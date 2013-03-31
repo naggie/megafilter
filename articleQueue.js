@@ -1,5 +1,5 @@
 // article (circular) queue actors.
-crypto = require('crypto')
+var crypto = require('crypto')
 
 exports.internal = function(params) {return new internal(params)}
 exports.redis    = function(params) {return new redis(params)}
