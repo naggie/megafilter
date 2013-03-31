@@ -1,10 +1,14 @@
+// article (circular) queue actors.
 crypto = require('crypto')
 
 exports.js    = function(params) {return new js(params)}
 exports.redis = function(params) {return new redis(params)}
 var js  = function (params) {
+	if (typeof params == 'undefined')
+		params = {}
+
 	// max number or articles in this queue
-	max = 999;
+	max = params.max | 999;
 
 	// current array index of article
 	var index = 0;
