@@ -38,7 +38,7 @@ var json  = function (params) {
 	// save an article
 	this.save = function(article) {
 		articles.push(article)
-		changed = true
+		return changed = true
 	}
 
 	// dump n latest articles (0 for all)
