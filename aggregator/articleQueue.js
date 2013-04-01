@@ -35,6 +35,7 @@ var internal = function (params) {
 	}
 
 	// return an article from the (circular) queue
+	// undefined if no items
 	this.next = function() {
 		if (articles[index])
 			return articles[index++]
@@ -44,15 +45,15 @@ var internal = function (params) {
 
 	// return the current article without advancing the index
 	this.current = function() {
-		return article[index]
+		return articles[index]
 	}
 
 	// remove an article from the queue, preserving the order
 	this.extract = function(id){
 		// look for the article index, given the ID
 		// 'i' is set to invalid index if not found
-		for (var i=0; i <= article.length; i++)
-			if (article[i].id == id)
+		for (var i=0; i <= articles.length; i++)
+			if (articles[i].id == id)
 				break;
 
 		// repair index if affected

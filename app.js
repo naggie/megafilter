@@ -5,6 +5,10 @@ var config = require('./config')
 var aggregator = require('./aggregator')
 
 
+
+aggregator.enqueue({title:'foo',content:'bar'})
+aggregator.enqueue({title:'blahblah',content:'bah bah'})
+
 var server = restify.createServer({
 	name: 'megafilter',
 	//certificate:'string',
@@ -16,11 +20,17 @@ server.use(restify.acceptParser(server.acceptable))
 server.use(restify.queryParser())
 server.use(restify.bodyParser())
 
-server.get('/echo/:name', function (req, res, next) {
-	res.send(req.params)
+server.get('/next', function (req, res, next) {
+	var data = aggregator.next()
+	res.send(data.article?200:404,data)
 	return next()
 })
 
+server.get('/current', function (req, res, next) {
+	var data = aggregator.current()
+	res.send(data.article?200:404,data)
+	return next()
+})
 
 server.get(/.*/,restify.serveStatic({
 	directory:__dirname+'/public/',

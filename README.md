@@ -27,7 +27,8 @@ Article format
 --------------
 
 	// some identifier that uniquely matches this article in the queue
-	id            : number;
+	// optional (hash will be generated)
+	id            : string;
 
 	publishedDate : Date;
 	title         : string;
