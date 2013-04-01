@@ -6,7 +6,6 @@
 // Will have to remember old intervals
 // using request object
 // https://github.com/danmactough/node-feedparser
-// TODO: gc on ids
 var fp = require('feedparser')
 //var request = require('request')
 
@@ -49,23 +48,21 @@ var watch = function (params) {
 		// oldest first is required to publish in correct order
 		articles.reverse()
 
-		if (!known.length)
-			// first launch, assume current is known
-			articles.forEach( function (article) {
-					known.push(article.guid)
-			})
-		else {
+		// do not publish articles on first run
+		if (known.length) {
 			articles.forEach( function (article,i) {
 				// is this article new? If so, guid is not in known
-				if (known.indexOf(article.guid) == -1) {
+				if (known.indexOf(article.guid) == -1)
 					params.callback(article)
-					known.push(article.guid)
-				}
 
 				var date = (new Date(article.pubdate) ).valueOf()
 				// convert to seconds
 				date /= 1000
 				dates.push(date)
+
+				// only keep 20
+				if (dates.length > 20)
+					dates.shift()
 			})
 		}
 
@@ -73,8 +70,13 @@ var watch = function (params) {
 		if (!params.interval)
 			calcInterval()
 
+		// GUID GARBAGE COLLECTION, EFFECTIVELY
 		// articles which have fallen off the end of the feed stack won't appear again
 		// so the old GUIDs may be removed. A simple way is to re-create the known array.
+		known = []
+		articles.forEach( function (article) {
+			known.push(article.guid)
+		})
 
 		// fire at next interval (time may change, so timeout is used rather than interval)
 		setTimeout(function() { parser.parseUrl(params.url,inspect) },interval.current*1000)
