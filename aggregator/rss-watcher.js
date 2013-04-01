@@ -34,7 +34,7 @@ var watch = function (params) {
 
 	// offset, to reduce hammering on server restart (updates)
 	// and also when checking multiple feeds from the same server
-	interval.offset = interval.current*Math.random() + interval.min
+	interval.offset = interval.current*Math.random() + 10
 
 	// array of pubdates to unix time, used for calculating update interval
 	var dates = []
@@ -119,7 +119,7 @@ var watch = function (params) {
 
 var watchMultiple = function (params) {
 	if (!params.urls) console.error('No URLs given')
-	if (!params.interval) params.interval = 15*60 // 15 minutes
+	if (!params.interval) params.interval = 5*60 // 5 minutes (default, autoscaled to average pubdate interval)
 	if (!params.callback) params.callback = function() {console.error('Callback needed')}
 
 	params.urls.forEach(function (url,i) {
