@@ -1,5 +1,7 @@
 var config  = require('./config')
 var restify = require('restify')
+var xml2js  = require('xml2js')
+var fs      = require('fs')
 
 var aggregator = require('./aggregator')
 
@@ -60,4 +62,33 @@ server.get(/.*/,restify.serveStatic({
 
 server.listen(process.env.PORT | 8080, function () {
 	console.log('%s listening at %s', server.name, server.url)
+})
+
+
+// MOAR FEEDS!!!!
+
+if (!fs.existsSync(config.subscriptions)) {
+	console.log('could not find',config.subscriptions)
+	process.exit(2)
+}
+
+// load subscriptions file
+var parser = new xml2js.Parser();
+fs.readFile(config.subscriptions, function(err, data) {
+	parser.parseString(data, function (err, result) {
+		if (err) {
+			console.log(err)
+			process.exit(1)
+		}
+
+		var feeds = result.opml.body[0].outline
+		var urls  = []
+
+		for (var i in feeds) {
+			console.log('Watching',feeds[i].$.title)
+			urls.push(feeds[i].$.xmlUrl)
+		}
+
+		aggregator.watchRssFeeds(urls)
+	})
 })

@@ -13,6 +13,5 @@ exports.store = 'json'
 // ACTOR CONFIG
 //...
 
-
-
-
+// XML file containing (OPML) RSS/ATOM feed URLs from google reader
+exports.subscriptions = __dirname+'/subscriptions.xml'
