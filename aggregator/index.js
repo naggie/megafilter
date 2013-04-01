@@ -6,8 +6,18 @@ config = require('../config')
 // above is so that redis and sqlite (async) can be implemented
 
 // load chosen actors
-queue  = new require('./articleQueue')[config.queue](config)
-store  = new require('./articleStore')[config.store](config)
+queue  = require('./articleQueue')[config.queue](config)
+store  = require('./articleStore')[config.store](config)
+
+watcher = require('./rss-watcher')
+
+
+exports.watchRssFeeds = function(urls) {
+	watcher.watchMultiple({
+		urls:urls,
+		callback:exports.enqueue
+	})
+}
 
 
 exports.next    = function() {

@@ -1,6 +1,5 @@
 var config  = require('./config')
 var restify = require('restify')
-var watcher = require('./rss-watcher')
 
 var aggregator = require('./aggregator')
 

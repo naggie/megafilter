@@ -8,5 +8,7 @@
   },
   "dependencies": {
     "restify": "2.3.5",
+    "feedparser": "*",
+    "xml2js": "*"
   }
 }

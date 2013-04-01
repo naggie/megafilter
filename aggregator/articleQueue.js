@@ -75,7 +75,7 @@ var internal = function (params) {
 // returns hex. hash of article
 function articleHash(article) {
 	var hash = crypto.createHash('md5')
-	hash.update(article.content)
+	hash.update(article.title+article.guid+article.link)
 	return hash.digest('hex')
 }
 
