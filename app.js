@@ -1,9 +1,8 @@
+var config  = require('./config')
 var restify = require('restify')
-
-var config = require('./config')
+var watcher = require('./rss-watcher')
 
 var aggregator = require('./aggregator')
-
 
 
 aggregator.enqueue({title:'foo',content:'bar'})
