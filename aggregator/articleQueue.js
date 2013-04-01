@@ -21,6 +21,11 @@ var internal = function (params) {
 
 	// add an Article to the queue, creating id: as hash if not there
 	this.enqueue = function(article) {
+		// stop next() from returning a dupe
+		// index must correspond to the same article
+		if (articles.length)
+			index++
+
 		if (!article.id)
 			article.id = articleHash(article)
 
@@ -29,9 +34,6 @@ var internal = function (params) {
 
 		if (articles.length > max)
 			articles.pop()
-
-		// stop next() from returning a dupe
-		index++
 	}
 
 	// return an article from the (circular) queue
@@ -45,6 +47,7 @@ var internal = function (params) {
 
 	// return the current article without advancing the index
 	this.current = function() {
+console.log(articles,articles[index],index)
 		return articles[index]
 	}
 
