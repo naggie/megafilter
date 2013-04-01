@@ -15,10 +15,14 @@ watcher = require('./rss-watcher')
 exports.watchRssFeeds = function(urls) {
 	watcher.watchMultiple({
 		urls:urls,
-		callback:exports.enqueue
+		callback:function(article) {
+			exports.enqueue(article)
+			exports.newArticle(article)
+		}
 	})
 }
 
+exports.newArticle = function(article){}
 
 exports.next    = function() {
 	return {

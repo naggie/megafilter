@@ -6,9 +6,6 @@ var fs      = require('fs')
 var aggregator = require('./aggregator')
 
 
-aggregator.enqueue({title:'foo',content:'bar'})
-aggregator.enqueue({title:'blahblah',content:'bah bah'})
-
 var server = restify.createServer({
 	name: 'megafilter',
 	//certificate:'string',
@@ -85,10 +82,15 @@ fs.readFile(config.subscriptions, function(err, data) {
 		var urls  = []
 
 		for (var i in feeds) {
-			console.log('Watching',feeds[i].$.title)
+			console.log('Watching:',feeds[i].$.title)
 			urls.push(feeds[i].$.xmlUrl)
 		}
 
 		aggregator.watchRssFeeds(urls)
 	})
 })
+
+
+aggregator.newArticle = function(article) {
+	console.log('New article:', article.title)
+}
