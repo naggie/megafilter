@@ -2,6 +2,7 @@
   "name": "megafilter",
   "version": "0.0.1",
   "private": true,
+  "author" : "Callan Bryant <callan.bryant@gmail.com> (http://callanbryant.co.uk/)",
   "scripts": {
     "start": "node app"
   },
