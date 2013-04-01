@@ -22,6 +22,9 @@ Publish an article by ID from the queue (removing it). Returns `pending` count.
 > `GET /articles/:count`
 Given a `count` as parameter, return published articles. 0 Means all articles, unspecified  means 30.
 
+> `GET /pending`
+Gives the current number of articles pending
+
 
 Article format
 --------------
