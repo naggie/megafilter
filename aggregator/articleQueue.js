@@ -63,7 +63,7 @@ var internal = function (params) {
 			index--
 
 		// remove the article, returning if exists
-		return articles.splice(i)[0]
+		return articles.splice(i,1)[0]
 	}
 
 	// number of articles in queue
