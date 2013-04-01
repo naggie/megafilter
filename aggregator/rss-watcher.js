@@ -16,7 +16,9 @@ var watch = function (params) {
 	if (!params.url) console.error('No URL given')
 	if (!params.callback) params.callback = function() {console.error('Callback needed')}
 
-	var parser = new fp ()
+	// silent: yes, I know parseURL is depreciated. See #15
+	var parser = new fp ({silent:true})
+
 	// array of known GUIDs
 	var known = []
 
@@ -42,7 +44,7 @@ var watch = function (params) {
 	// if so, and it to the public callback
 	// also ignore the first batch. Real time only.
 	var inspect = function(error,meta,articles) {
-		if (error) return console.log(error)
+		if (error) return console.error(params.url,error)
 
 		// oldest first is required to publish in correct order
 		articles.reverse()
@@ -70,6 +72,9 @@ var watch = function (params) {
 		// recalculate interval (if interval was not explicitly set)
 		if (!params.interval)
 			calcInterval()
+
+		// articles which have fallen off the end of the feed stack won't appear again
+		// so the old GUIDs may be removed. A simple way is to re-create the known array.
 
 		// fire at next interval (time may change, so timeout is used rather than interval)
 		setTimeout(function() { parser.parseUrl(params.url,inspect) },interval.current*1000)

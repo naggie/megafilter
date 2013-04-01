@@ -80,7 +80,7 @@ var parser = new xml2js.Parser();
 fs.readFile(config.subscriptions, function(err, data) {
 	parser.parseString(data, function (err, result) {
 		if (err) {
-			console.log(err)
+			console.error(err)
 			process.exit(1)
 		}
 
