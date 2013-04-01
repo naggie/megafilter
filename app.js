@@ -49,6 +49,12 @@ server.get('/articles/:count',function(req,res,next) {
 	return next()
 })
 
+server.get('/pending',function(req,res,next) {
+	res.send({
+		pending:aggregator.pending()
+	})
+	return next()
+})
 
 // any other request, for static things
 server.get(/.*/,restify.serveStatic({
@@ -57,10 +63,10 @@ server.get(/.*/,restify.serveStatic({
 	//maxAge:3600,
 }))
 
+
 server.listen(process.env.PORT | 8080, function () {
 	console.log('%s listening at %s', server.name, server.url)
 })
-
 
 // MOAR FEEDS!!!!
 

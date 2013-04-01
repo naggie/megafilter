@@ -37,7 +37,6 @@ exports.current = function() {
 		article: queue.current()
 	}
 }
-exports.dump    = store.dump
 
 exports.discard = function(id) {
 	return !!queue.extract(id)
@@ -52,3 +51,5 @@ exports.publish = function(id) {
 }
 
 exports.enqueue = queue.enqueue
+exports.dump    = store.dump
+exports.pending = queue.pending

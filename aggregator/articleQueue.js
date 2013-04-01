@@ -69,7 +69,7 @@ var internal = function (params) {
 	// number of articles in queue
 	this.pending = function(){
 		return articles.length
-	};
+	}
 }
 
 // returns hex. hash of article
