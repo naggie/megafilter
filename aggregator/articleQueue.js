@@ -39,15 +39,14 @@ var internal = function (params) {
 	// return an article from the (circular) queue
 	// undefined if no items
 	this.next = function() {
-		if (articles[index])
-			return articles[index++]
+		if (articles[++index])
+			return articles[index]
 		else
 			return articles[index = 0]
 	}
 
 	// return the current article without advancing the index
 	this.current = function() {
-console.log(articles,articles[index],index)
 		return articles[index]
 	}
 
