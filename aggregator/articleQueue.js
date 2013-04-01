@@ -55,7 +55,7 @@ var internal = function (params) {
 		// look for the article index, given the ID
 		// 'i' is set to invalid index if not found
 		for (var i=0; i <= articles.length; i++)
-			if (articles[i].id == id)
+			if (i==articles.length  || articles[i].id == id)
 				break;
 
 		// repair index if affected

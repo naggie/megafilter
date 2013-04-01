@@ -20,18 +20,40 @@ server.use(restify.acceptParser(server.acceptable))
 server.use(restify.queryParser())
 server.use(restify.bodyParser())
 
-server.get('/next', function (req, res, next) {
+server.get('/next',function(req,res,next) {
 	var data = aggregator.next()
 	res.send(data.article?200:404,data)
 	return next()
 })
 
-server.get('/current', function (req, res, next) {
+server.get('/current',function(req,res,next) {
 	var data = aggregator.current()
 	res.send(data.article?200:404,data)
 	return next()
 })
 
+
+server.get('/publish/:id',function(req,res,next) {
+	var success = aggregator.publish(req.params.id)
+	res.send(success?200:404,{success:success})
+	return next()
+})
+
+
+server.del('/:id',function(req,res,next) {
+	var success = aggregator.discard(req.params.id)
+	res.send(success?200:404,{success:success})
+	return next()
+})
+
+server.get('/articles/:count',function(req,res,next) {
+	var articles = aggregator.dump(req.params.count)
+	res.send(articles.length?200:404,articles)
+	return next()
+})
+
+
+// any other request, for static things
 server.get(/.*/,restify.serveStatic({
 	directory:__dirname+'/public/',
 	default:'index.html',

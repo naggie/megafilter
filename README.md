@@ -16,10 +16,10 @@ Get the current article (good for first load) returns `article` and `pending` co
 > `DELETE /:id`
 Discard an article from the queue. Returns `pending` count.
 
-> `POST /:id`
+> `GET /publish/:id`
 Publish an article by ID from the queue (removing it). Returns `pending` count.
 
-> `GET /articles`
+> `GET /articles/:count`
 Given a `count` as parameter, return published articles. 0 Means all articles, unspecified  means 30.
 
 
