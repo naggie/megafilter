@@ -79,6 +79,7 @@ server.get(/.*/,restify.serveStatic({
 	directory:__dirname+'/public/',
 	default:'index.html',
 	//maxAge:3600,
+	maxAge:0, // disable cache
 }))
 
 

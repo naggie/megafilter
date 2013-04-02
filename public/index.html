@@ -26,6 +26,7 @@
 				text-align:center;
 			}
 			article {
+				visibility:hidden;
 				display:inline-block;
 				text-align:left;
 				border:1px solid gray;
@@ -70,7 +71,7 @@
 				padding:10px 0 10px 0;
 				height:55px;
 			}
-			nav li:hover {
+			nav li:hover, .depressed {
 				background:#333;
 			}
 			nav i {
@@ -78,7 +79,7 @@
 				display:block!important;
 				margin:auto;
 			}
-			nav li:active {
+			nav li:active , .depressed {
 				position:relative;
 				top:1px;
 			}
@@ -127,51 +128,26 @@
 			}
 
 		</style>
-		<script src=""></script>
+		<script src="jquery-1.9.1.min.js"></script>
+		<script src="hotkeys/jquery.hotkeys.js"></script>
 		<script src="client.js"></script>
 	</head>
 	<body>
 		<article>
-
-
-
-
-
-<h1><a target="_new" href="http://feedproxy.google.com/~r/hackaday/LgoM/~3/xttzD3XBtY8/">AVR VGA generator</a> &raquo;<time datetime="Fri, 29 Mar 2013 12:01:37 -0700">2 hours ago</time><span class="note"> by Mike Szczys</span></h1>
-
-
-
-<p><img src="http://callanbryant.co.uk/blog/images/homebrew.png" alt="homebrew" title=""></p>
-
-<p>Learning from other package managers such as macports, apt and pacman, homebrew
-uses the power of git and ruby to create a really lightweight yet customisable
-and community oriented system.</p>
-
-<p>It is powered completely by git for the packages. This means that anyone can
-add a package to the main repository via a pull request on github. As a result,
-maintenance os fast!</p>
-
-<p>Packages are simple ruby class definition files. They rely on external tar
-archives when compiled from source, and can also install from checksum'd binary
-files. Tests are included as a requirement.</p>
-
-<p><a href="http://braumeister.org/">Braumeister</a> is a great online package search system. As a alternative, the
-command line client can also search.</p>
-
-
-
-
-
+			<!-- Yes, this is ugly. Needs fixing. -->
+			<!-- Sort of like a view template -->
+			<h1><a target="_new" href="#"></a> &raquo;<time datetime=""></time><span class="note"></span></h1>
+			<section class="description"></section>
 
 		</article>
 		<nav>
 			<div id="pending" title="Number of articles waiting in the queue">999</div>
 			<ul>
-				<li><i class="icon-double-angle-right" title="Deal with this article later"></i>Skip</li>
-				<li><i class="icon-trash" title="Remove this article from the queue"></i>Discard</li>
-				<li><i class="icon-eye-open" title="View on original website"></i>Inspect</li>
-				<li><i class="icon-cloud-upload" title="Publish to star feed"></i>Publish</li>
-				<li class="disabled"><i class="icon-undo" title="Undo last action"></i>Undo</li>
+				<li id="skip"><i class="icon-double-angle-right" title="Deal with this article later"></i>Skip</li>
+				<li id="discard"><i class="icon-trash" title="Remove this article from the queue"></i>Discard</li>
+				<li id="inspect"><i class="icon-eye-open" title="View on original website"></i>Inspect</li>
+				<li id="publish"><i class="icon-cloud-upload" title="Publish to star feed"></i>Publish</li>
+				<li id="undo"><i class="icon-undo" title="Undo last action"></i>Undo</li>
 			</ul>
 		</nav>
 		<div id="loading"></div>
