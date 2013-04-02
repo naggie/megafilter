@@ -9,10 +9,21 @@ $(function(){
 	mf.nav.skip    = new mf.controllers.button('#skip')
 	mf.nav.discard = new mf.controllers.button('#discard')
 	mf.nav.publish = new mf.controllers.button('#publish')
+	mf.nav.inspect = new mf.controllers.button('#inspect')
 	mf.nav.undo    = new mf.controllers.button('#undo')
 
 	mf.nav.skip.bind('right')
+	mf.nav.skip.bind('j')
+	mf.nav.discard.bind('x')
+	mf.nav.discard.bind('d')
+	mf.nav.publish.bind('w')
+	mf.nav.publish.bind('p')
+	mf.nav.inspect.bind('i')
+	mf.nav.inspect.bind('return')
+	mf.nav.undo.bind('u')
 	mf.nav.undo.disable()
+
+	mf.article = new mf.controllers.article('article')
 })
 
 var mf = {}
