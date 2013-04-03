@@ -14,6 +14,7 @@ $(function(){
 
 	mf.nav.skip.bind('right')
 	mf.nav.skip.bind('j')
+	mf.nav.skip.bind('s')
 	mf.nav.discard.bind('x')
 	mf.nav.discard.bind('d')
 	mf.nav.publish.bind('w')
