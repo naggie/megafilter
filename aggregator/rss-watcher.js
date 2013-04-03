@@ -40,10 +40,10 @@ var watch = function (params) {
 	var interval = {
 		// 1 minute
 		min: 60,
-		// 1 day
-		max: 84600,
-		// initially set to default value, 5 hours
-		current: 18000,
+		// 1/2 day
+		max: 42300,
+		// initially set to default value, 1 hour
+		current: 3600,
 	}
 
 	if (params.interval) interval.current = params.interval
