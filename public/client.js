@@ -91,15 +91,18 @@ mf.controllers.button = function(selector){
 
 	// bind a key
 	this.bind = function(key) {
-		if (!enabled) return
 
 		// press
 		$(document).bind('keydown',key,function() {
+			if (!enabled) return false
+
 			ele.addClass('depressed')
 			return false
 		})
 		// release
 		$(document).bind('keyup',key,function() {
+			if (!enabled) return false
+
 			ele.removeClass('depressed')
 			action()
 			return false
