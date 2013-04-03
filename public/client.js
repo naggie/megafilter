@@ -160,9 +160,10 @@ mf.article = null
 mf.load = mf.skip = function() {
 	mf.article.wait()
 	$({
-		url: mf.article?'next':'current',
+		url: mf.article?'/next':'/current',
 		type:'GET',
 		error:function() {
+
 			mf.article.error('Error....')
 		},
 		success:function(data) {
