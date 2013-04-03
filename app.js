@@ -106,10 +106,12 @@ fs.readFile(config.subscriptions, function(err, data) {
 		var feeds = result.opml.body[0].outline
 		var urls  = []
 
-		for (var i in feeds) {
-			console.log('Watching:',feeds[i].$.title)
+		for (var i in feeds)
 			urls.push(feeds[i].$.xmlUrl)
-		}
+
+		console.log('Watching',urls.length,'feeds')
+//FIXME temporary debug LOL
+urls = ['https://github.com/blog.atom']
 
 		aggregator.watchRssFeeds(urls)
 	})

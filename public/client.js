@@ -29,11 +29,11 @@ mf.init = function() {
 
 	mf.pending = new mf.controllers.counter('#pending')
 
-	mf.nav.skip.action    = mf.skip
-	mf.nav.discard.action = mf.discard
-	mf.nav.publish.action = mf.publish
-	mf.nav.inspect.action = mf.inspect
-	//mf.nav.undo.action    = mf.undo
+	mf.nav.skip.action(mf.skip)
+	mf.nav.discard.action(mf.discard)
+	mf.nav.publish.action(mf.publish)
+	mf.nav.inspect.action(mf.inspect)
+	//mf.nav.undo.action(mf.undo)
 }
 
 mf.updatePending = function(count) {
@@ -109,7 +109,11 @@ mf.controllers.button = function(selector){
 	var enabled = true;
 
 	// callback for when button is clicked or key is pressed
-	var action = this.action = function() {}
+	var action = function() {}
+
+	this.action = function(fn) {
+		action = fn
+	}
 
 	ele.click(function() {
 		if (enabled)
