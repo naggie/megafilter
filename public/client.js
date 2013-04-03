@@ -2,8 +2,23 @@
 // TODO: convert to backbone?
 
 $(function(){
+	mf.init()
 	//mf.initialArticle(mf.loadNext)
+	$.ajax({
+		url:'/next',
+		type:'GET',
+		error:function() {
+			mf.article.error('Error....')
+		},
+		success:function(data) {
+			mf.article.render(data.article)
+		}
+	})
+})
 
+var mf = {}
+
+mf.init = function() {
 	// put in constructor
 	mf.nav = {}
 	mf.nav.skip    = new mf.controllers.button('#skip')
@@ -20,26 +35,23 @@ $(function(){
 	mf.nav.undo.disable()
 
 	mf.article = new mf.controllers.article('article')
-	//mf.article.wait()
-})
+	mf.article.wait()
 
-var mf = {}
+	mf.pending = new mf.controllers.counter('#pending')
+
+	mf.nav.skip.action    = mf.skip
+	mf.nav.discard.action = mf.discard
+	mf.nav.publish.action = mf.publish
+	mf.nav.inspect.action = mf.inspect
+	//mf.nav.undo.action    = mf.undo
+}
 
 mf.updatePending = function(count) {
 	$('#pending').text(count)
 }
 
-// cache the next article
-mf.loadNext = function() {
-
-}
-
 // render the next article from cache and begin to use the
 mf.next = function() {}
-
-mf.initialArticle = function(done) {
-	
-}
 
 mf.controllers = {}
 
@@ -80,6 +92,26 @@ mf.controllers.article = function(selector) {
 	}
 }
 
+
+mf.controllers.counter = function(selector) {
+	ele = $(selector)
+	var value = 0
+
+	this.set = function(number) {
+		ele.text(number)
+		value = number
+		return this
+	}
+
+	this.get = function() {
+		return value
+	}
+
+	this.decrement = function() {
+		ele.text(--value)
+		return this
+	}
+}
 
 // navigation buttons (sort of like a view controller)
 mf.controllers.button = function(selector){
@@ -128,3 +160,60 @@ mf.controllers.button = function(selector){
 	}
 }
 
+// -------model?
+
+// current article
+mf.article = null
+
+mf.skip = function() {
+	mf.load()
+}
+
+// download and display the next article (or current on first load)
+mf.load = function() {
+	mf.article.wait()
+	$({
+		url: mf.article?'next':'current',
+		type:'GET',
+		error:function() {
+			mf.article.error('Error....')
+		},
+		success:function(data) {
+			if (!data.pending) {
+				mf.article.error('None left in queue')
+				//mf.nav.disable()
+			} else {
+				//mf.nav.enable()
+				mf.article.render(data.article)
+			}
+
+			mf.pending.set(data.pending)
+		}
+
+
+	})
+}
+
+mf.publish = function() {
+
+}
+
+mf.discard = function() {
+	mf.pending.decrement()
+	$({
+		url:'/'+mf.article.id,
+		type:'DELETE',
+		error:function() {
+			mf.article.error('Error....')
+		},
+		success:function(data) {
+			console.log('Deleted article')
+		}
+
+	})
+	mf.load()
+}
+
+mf.inspect = function() {
+	window.open(mf.article.link)
+}

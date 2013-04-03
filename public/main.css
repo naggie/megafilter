@@ -86,7 +86,6 @@ nav li.disabled i {
 	outline:1px solid red;
 	z-index:-999;
 	margin:0 0 0 -36px;
-	display:none;
 }
 a {
 	color:#84bc2b;
