@@ -33,7 +33,7 @@ server.use(restify.acceptParser(server.acceptable))
 server.use(restify.queryParser())
 server.use(restify.bodyParser())
 server.use(restify.jsonp());
-server.use(restify.gzipResponse());
+//server.use(restify.gzipResponse()); // breaks page load
 
 server.get('/next',function(req,res,next) {
 	var data = aggregator.next()
