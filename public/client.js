@@ -159,7 +159,7 @@ mf.article = null
 // download and display the next article (or current on first load)
 mf.load = mf.skip = function() {
 	mf.article.wait()
-	$({
+	$.ajax({
 		url: mf.article?'/next':'/current',
 		type:'GET',
 		error:function() {
