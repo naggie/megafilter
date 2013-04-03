@@ -24,8 +24,8 @@ mf.init = function() {
 	mf.nav.undo.bind('u').bind('ctrl+z')
 	mf.nav.undo.disable()
 
-	mf.article = new mf.controllers.article('article')
-	mf.article.wait()
+	mf.display = new mf.controllers.display('article')
+	mf.display.wait()
 
 	mf.pending = new mf.controllers.counter('#pending')
 
@@ -45,7 +45,7 @@ mf.next = function() {}
 
 mf.controllers = {}
 
-mf.controllers.article = function(selector) {
+mf.controllers.display = function(selector) {
 	var ele = $(selector)
 
 	// render a given node-feedparser article to the page
@@ -158,21 +158,22 @@ mf.article = null
 
 // download and display the next article (or current on first load)
 mf.load = mf.skip = function() {
-	mf.article.wait()
+	mf.display.wait()
 	$.ajax({
 		url: mf.article?'/next':'/current',
 		type:'GET',
 		error:function() {
 
-			mf.article.error('Error....')
+			mf.display.error('Error....')
 		},
 		success:function(data) {
 			if (!data.pending) {
-				mf.article.error('None left in queue')
+				mf.display.error('None left in queue')
 				//mf.nav.disable()
 			} else {
 				//mf.nav.enable()
-				mf.article.render(data.article)
+				mf.article = data.article
+				mf.display.render(data.article)
 			}
 
 			mf.pending.set(data.pending)
@@ -192,7 +193,7 @@ mf.discard = function() {
 		url:'/'+mf.article.id,
 		type:'DELETE',
 		error:function() {
-			mf.article.error('Error....')
+			mf.display.error('Error....')
 		},
 		success:function(data) {
 			console.log('Deleted article')
