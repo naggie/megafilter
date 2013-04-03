@@ -109,6 +109,7 @@
 				outline:1px solid red;
 				z-index:-999;
 				margin:0 0 0 -36px;
+				display:none;
 			}
 			a {
 				color:#84bc2b;
@@ -126,17 +127,28 @@
 			article time {
 				margin-left:22px;
 			}
-
+			#error {
+				position:fixed;
+				display:none;
+				font-size:40px;
+				color:gray;
+				right:100px;
+				text-align:center;
+				top:40%;
+				left:0;
+				background:white;
+			}
 		</style>
 		<script src="jquery-1.9.1.min.js"></script>
 		<script src="hotkeys/jquery.hotkeys.js"></script>
 		<script src="client.js"></script>
 	</head>
 	<body>
+		<div id="error"></div>
 		<article>
 			<!-- Yes, this is ugly. Needs fixing. -->
 			<!-- Sort of like a view template -->
-			<h1><a target="_new" href="#"></a> &raquo;<time datetime=""></time><span class="note"></span></h1>
+			<h1><a target="_new" href="#"></a> <time datetime=""></time><span class="note"></span></h1>
 			<section class="description"></section>
 
 		</article>

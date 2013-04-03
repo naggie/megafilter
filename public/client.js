@@ -15,6 +15,7 @@ $(function(){
 	mf.nav.skip.bind('right')
 	mf.nav.skip.bind('j')
 	mf.nav.skip.bind('s')
+	mf.nav.skip.bind('space')
 	mf.nav.discard.bind('x')
 	mf.nav.discard.bind('d')
 	mf.nav.publish.bind('w')
@@ -25,6 +26,7 @@ $(function(){
 	mf.nav.undo.disable()
 
 	mf.article = new mf.controllers.article('article')
+	//mf.article.wait()
 })
 
 var mf = {}
@@ -52,15 +54,35 @@ mf.controllers.article = function(selector) {
 
 	// render a given node-feedparser article to the page
 	this.render = function(article) {
+		$('#error').hide()
+		$('#loading').hide()
 		ele.css('visibility','visible')
 		$('section.description',ele).html(article.description)
-		$('> h1 a',ele).text(article.title).attr(href,article.origlink)
+		$('> h1 a',ele).text(article.title).attr('href',article.origlink)
 		$('time',ele).attr('datetime',article.pubdate)
 		$('.note',ele).html(article.author).prepend(' by ')
+		return this
 	}
 
-	this.hide = ele.hide = function() {
+	var hide = this.hide = function() {
 		ele.css('visibility','hidden')
+		return this
+	}
+
+	// show loading animation
+	this.wait = function(){
+		$('#loading').show()
+		hide()
+		$('#error').hide()
+		return this
+	}
+
+	// show 'error' message
+	this.error = function(msg) {
+		$('#loading').hide()
+		hide()
+		$('#error').show().text(msg)
+		return this
 	}
 }
 
