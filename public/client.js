@@ -3,17 +3,7 @@
 
 $(function(){
 	mf.init()
-	//mf.initialArticle(mf.loadNext)
-	$.ajax({
-		url:'/next',
-		type:'GET',
-		error:function() {
-			mf.article.error('Error....')
-		},
-		success:function(data) {
-			mf.article.render(data.article)
-		}
-	})
+	mf.load()
 })
 
 var mf = {}
@@ -165,12 +155,9 @@ mf.controllers.button = function(selector){
 // current article
 mf.article = null
 
-mf.skip = function() {
-	mf.load()
-}
 
 // download and display the next article (or current on first load)
-mf.load = function() {
+mf.load = mf.skip = function() {
 	mf.article.wait()
 	$({
 		url: mf.article?'next':'current',
