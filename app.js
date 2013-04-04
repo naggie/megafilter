@@ -61,8 +61,12 @@ server.del('/:id',function(req,res,next) {
 	return next()
 })
 
-server.get('/articles/:count',function(req,res,next) {
-	var articles = aggregator.dump(req.params.count)
+server.get('/articles',function(req,res,next) {
+	// limit
+	if (!req.query.count || req.query.count > config.maxArticles)
+		req.query.count = config.maxArticles
+
+	var articles = aggregator.dump(req.query.count)
 	res.send(articles.length?200:404,articles)
 	return next()
 })

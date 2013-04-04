@@ -15,3 +15,7 @@ exports.store = 'json'
 
 // XML file containing (OPML) RSS/ATOM feed URLs from google reader
 exports.subscriptions = __dirname+'/subscriptions.xml'
+
+
+// maximum number of articles
+exports.maxArticles     = 300
