@@ -25,7 +25,7 @@ var json  = function (params) {
 		params = {}
 
 	// file to save/load
-	var file = params.file | __dirname+'/../starred.json';
+	var file = params.file || __dirname+'/../starred.json';
 
 	// save interval, default 5mins, in seconds
 	var saveInterval = params.saveInterval | 60*5
@@ -46,7 +46,8 @@ var json  = function (params) {
 		changed = false;
 
 		var json = JSON.stringify(articles)
-		fs.writeFile(file,json,{encoding:'utf8'},function(){
+		fs.writeFile(file,json,{encoding:'utf8'},function(err) {
+			if (err) console.err(err)
 			console.log('Saved '+articles.length+' starred items')
 		})
 	}, saveInterval*1000)
