@@ -192,7 +192,19 @@ mf.load = mf.skip = function() {
 }
 
 mf.publish = function() {
+	mf.pending.decrement()
+	$.ajax({
+		url:'/publish/'+mf.article.id,
+		type:'GET',
+		error:function() {
+			mf.display.error("None left!")
+		},
+		success:function(data) {
+			console.log('Published article')
+		}
 
+	})
+	mf.load()
 }
 
 mf.discard = function() {
