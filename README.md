@@ -1,7 +1,21 @@
 Remember to do a recursive clone, there are submodules. If you don't the icons won't work.
 
+	git clone --recursive https://github.com/naggie/megafilter.git
+	cd megafilter/
+	# copy subscriptions.xml from your google reader takout here
+	npm install
+	node app
+	open http://localhost:8080
 
-I'll open-source it under MIT, BSD or GPLv2 when it works.
+The idea is that you run this on your own server. You can specify a PORT via
+the environment variable. [Setcap can be used][1] to run from port 80 without sudo
+
+[1]: http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
+
+
+Authentication will come soon, as will a way to import your starred items in to
+an SQLite database.
+
 
 
 RESTful JSON API
