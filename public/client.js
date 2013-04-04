@@ -174,17 +174,18 @@ mf.load = mf.skip = function() {
 		error:function() {
 			mf.display.error('No more articles')
 		},
-		success:function(data) {
-			if (!data.pending) {
+		success:function(article) {
+			if (!article.pending) {
 				mf.display.error('None left in queue')
+				ml.article = null
 				//mf.nav.disable()
 			} else {
 				//mf.nav.enable()
-				mf.article = data.article
-				mf.display.render(data.article)
+				mf.article = article
+				mf.display.render(article)
 			}
 
-			mf.pending.set(data.pending)
+			mf.pending.set(article.pending)
 		}
 
 
@@ -199,7 +200,7 @@ mf.publish = function() {
 		error:function() {
 			mf.display.error("None left!")
 		},
-		success:function(data) {
+		success:function() {
 			console.log('Published article')
 		}
 
@@ -215,7 +216,7 @@ mf.discard = function() {
 		error:function() {
 			mf.display.error("That's it!")
 		},
-		success:function(data) {
+		success:function() {
 			console.log('Deleted article')
 		}
 

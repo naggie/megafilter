@@ -36,14 +36,14 @@ server.use(restify.jsonp());
 //server.use(restify.gzipResponse()); // breaks page load
 
 server.get('/next',function(req,res,next) {
-	var data = aggregator.next()
-	res.send(data.article?200:404,data)
+	var article = aggregator.next()
+	res.send(article?200:404,article)
 	return next()
 })
 
 server.get('/current',function(req,res,next) {
-	var data = aggregator.current()
-	res.send(data.article?200:404,data)
+	var article = aggregator.current()
+	res.send(article?200:404,article)
 	return next()
 })
 

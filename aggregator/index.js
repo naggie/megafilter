@@ -41,17 +41,17 @@ exports.watchRssFeeds = function(urls) {
 exports.newArticle = function(article){}
 
 exports.next    = function() {
-	return {
-		pending: queue.pending(),
-		article: queue.next()
-	}
+	var article = queue.next()
+	if (article)
+		article.pending = queue.pending()
+	return article
 }
 
 exports.current = function() {
-	return {
-		pending: queue.pending(),
-		article: queue.current()
-	}
+	var article = queue.current()
+	if (article)
+		article.pending = queue.pending()
+	return article
 }
 
 exports.discard = function(id) {
