@@ -51,8 +51,6 @@ var watch = function (params) {
 	// offset, to reduce hammering on server restart (updates)
 	// and also when checking multiple feeds from the same server
 	interval.offset = interval.current*Math.random() + 10
-//FIXME temporary debug LOL
-interval.offset = 0
 
 	// array of pubdates to unix time, used for calculating update interval
 	var dates = []
@@ -67,9 +65,7 @@ interval.offset = 0
 		articles.reverse()
 
 		// do not publish articles on first run
-//FIXME temporary debug LOL
-//		if (known.length) {
-		if (true) {
+		if (known.length) {
 			articles.forEach( function (article,i) {
 				// is this article new? If so, guid is not in known
 				if (known.indexOf(article.guid) == -1)

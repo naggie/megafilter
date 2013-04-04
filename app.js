@@ -114,8 +114,6 @@ fs.readFile(config.subscriptions, function(err, data) {
 			urls.push(feeds[i].$.xmlUrl)
 
 		console.log('Watching',urls.length,'feeds')
-//FIXME temporary debug LOL
-urls = ['https://github.com/blog.atom']
 
 		aggregator.watchRssFeeds(urls)
 	})
