@@ -82,7 +82,7 @@ mf.controllers.display = function(selector) {
 	}
 }
 
-
+// positive article counter
 mf.controllers.counter = function(selector) {
 	ele = $(selector)
 	var value = 0
@@ -93,12 +93,17 @@ mf.controllers.counter = function(selector) {
 		return this
 	}
 
+	// initialise
+	this.set(value)
+
 	this.get = function() {
 		return value
 	}
 
 	this.decrement = function() {
-		ele.text(--value)
+		if (value > 0)
+			ele.text(--value)
+
 		return this
 	}
 }
@@ -167,8 +172,7 @@ mf.load = mf.skip = function() {
 		url: mf.article?'/next':'/current',
 		type:'GET',
 		error:function() {
-
-			mf.display.error('Error....')
+			mf.display.error('No more articles')
 		},
 		success:function(data) {
 			if (!data.pending) {
@@ -193,11 +197,11 @@ mf.publish = function() {
 
 mf.discard = function() {
 	mf.pending.decrement()
-	$({
+	$.ajax({
 		url:'/'+mf.article.id,
 		type:'DELETE',
 		error:function() {
-			mf.display.error('Error....')
+			mf.display.error("That's it!")
 		},
 		success:function(data) {
 			console.log('Deleted article')
