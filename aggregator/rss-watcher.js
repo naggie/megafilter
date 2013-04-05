@@ -40,8 +40,8 @@ var watch = function (params) {
 	var interval = {
 		// 2 minute
 		min: 120,
-		// 1/2 day
-		max: 42300,
+		// 1/4 day
+		max: 21600,
 		// initially set to default value, 1 hour
 		current: 3600,
 	}
@@ -51,7 +51,7 @@ var watch = function (params) {
 	// offset, to reduce hammering on server restart (updates)
 	// and also when checking multiple feeds from the same server
 	// spread all initial checks over the first 4 mins
-	interval.offset = 240*Math.random() + 10
+	interval.offset = 240*Math.random()
 
 	// array of pubdates to unix time, used for calculating update interval
 	var dates = []
@@ -100,14 +100,13 @@ var watch = function (params) {
 	var calcInterval = function() {
 		var periods = []
 
-		dates.sort(function(a,b){return a-b})
-
 		dates.forEach(function (d,i) {
 			if (dates[i+1])
 				periods.push(dates[i+1] - d)
 		})
 
 		// remove potential outliers
+		periods.sort(function(a,b){return a-b})
 		periods.push()
 		periods.pop()
 
@@ -132,22 +131,5 @@ var watch = function (params) {
 	setTimeout(function() { parser.parseUrl(params.url,inspect) },interval.offset*1000)
 }
 
-var watchMultiple = function (params) {
-	if (!params.urls) console.error('No URLs given')
-	if (!params.interval) params.interval = 5*60 // 5 minutes (default, autoscaled to average pubdate interval)
-	if (!params.callback) params.callback = function() {console.error('Callback needed')}
-
-	params.urls.forEach(function (url,i) {
-		// different offset for each, to avoid hammering
-		var offset = i*(params.interval/params.urls.length)
-		new watch({
-			url:url,
-			interval:params.interval,
-			callback:params.callback
-		})
-	})
-}
-
 exports.watch = function(params) {return new watch(params)}
-exports.watchMultiple = function(params) {return new watchMultiple(params)}
 

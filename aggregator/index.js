@@ -29,12 +29,14 @@ watcher = require('./rss-watcher')
 
 
 exports.watchRssFeeds = function(urls) {
-	watcher.watchMultiple({
-		urls:urls,
-		callback:function(article) {
-			exports.enqueue(article)
-			exports.newArticle(article)
-		}
+	urls.forEach(function(url){
+		watcher.watch({
+			url:url,
+			callback:function(article) {
+				exports.enqueue(article)
+				exports.newArticle(article)
+			}
+		})
 	})
 }
 
