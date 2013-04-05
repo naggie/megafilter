@@ -39,6 +39,8 @@ mf.init = function() {
 	mf.nav.publish.action(mf.publish)
 	mf.nav.inspect.action(mf.inspect)
 	//mf.nav.undo.action(mf.undo)
+
+	setInterval(mf.check_pending,5000)
 }
 
 mf.updatePending = function(count) {
@@ -252,4 +254,13 @@ mf.nav.disable = function() {
 	mf.nav.discard.disable()
 	mf.nav.publish.disable()
 	mf.nav.inspect.disable()
+}
+
+mf.check_pending = function () {
+	$({
+		url: '/pending',
+		success: function(d) {
+			mf.pending.set(d.pending)
+		}
+	})
 }
