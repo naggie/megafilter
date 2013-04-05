@@ -38,8 +38,8 @@ var watch = function (params) {
 	var known = []
 
 	var interval = {
-		// 1 minute
-		min: 60,
+		// 2 minute
+		min: 120,
 		// 1/2 day
 		max: 42300,
 		// initially set to default value, 1 hour
@@ -50,7 +50,8 @@ var watch = function (params) {
 
 	// offset, to reduce hammering on server restart (updates)
 	// and also when checking multiple feeds from the same server
-	interval.offset = interval.current*Math.random() + 10
+	// spread all initial checks over the first 4 mins
+	interval.offset = 240*Math.random() + 10
 
 	// array of pubdates to unix time, used for calculating update interval
 	var dates = []
@@ -64,23 +65,21 @@ var watch = function (params) {
 		// oldest first is required to publish in correct order
 		articles.reverse()
 
-		// do not publish articles on first run
-		if (known.length) {
-			articles.forEach( function (article,i) {
-				// is this article new? If so, guid is not in known
-				if (known.indexOf(article.guid) == -1)
-					params.callback(article)
+		articles.forEach( function (article,i) {
+			// is this article new? If so, guid is not in known
+			// also do not publish articles on first run
+			if (known.length && known.indexOf(article.guid) == -1)
+				params.callback(article)
 
-				var date = (new Date(article.pubdate) ).valueOf()
-				// convert to seconds
-				date /= 1000
-				dates.push(date)
+			var date = (new Date(article.pubdate) ).valueOf()
+			// convert to seconds
+			date /= 1000
+			dates.push(date)
 
-				// only keep 20
-				if (dates.length > 20)
-					dates.shift()
-			})
-		}
+			// only keep 20
+			if (dates.length > 20)
+				dates.shift()
+		})
 
 		// recalculate interval (if interval was not explicitly set)
 		if (!params.interval)
