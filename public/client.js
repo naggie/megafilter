@@ -179,6 +179,7 @@ mf.article = null
 // download and display the next article (or current on first load)
 mf.load = mf.skip = function() {
 	mf.display.wait()
+	mf.nav.disable()
 	$.ajax({
 		url: mf.article?'/next':'/current',
 		type:'GET',
@@ -192,6 +193,7 @@ mf.load = mf.skip = function() {
 			} else {
 				mf.article = article
 				mf.display.render(article)
+				mf.nav.enable()
 			}
 
 			mf.pending.set(article.pending)
