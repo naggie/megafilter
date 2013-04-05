@@ -54,8 +54,12 @@ mf.controllers = {}
 mf.controllers.display = function(selector) {
 	var ele = $(selector)
 
+	// currently displayed article, if any
+	this.article = null
+
 	// render a given node-feedparser article to the page
 	this.render = function(article) {
+		this.article = article
 		$('#error').hide()
 		$('#loading').hide()
 		ele.css('visibility','visible')
@@ -66,7 +70,8 @@ mf.controllers.display = function(selector) {
 		return this
 	}
 
-	var hide = this.hide = function() {
+	var discard = this.discard = function() {
+		this.article = null
 		ele.css('visibility','hidden')
 		return this
 	}
@@ -74,7 +79,7 @@ mf.controllers.display = function(selector) {
 	// show loading animation
 	this.wait = function(){
 		$('#loading').show()
-		hide()
+		discard()
 		$('#error').hide()
 		return this
 	}
@@ -82,7 +87,7 @@ mf.controllers.display = function(selector) {
 	// show 'error' message
 	this.error = function(msg) {
 		$('#loading').hide()
-		hide()
+		discard()
 		$('#error').show().text(msg)
 		return this
 	}
@@ -175,16 +180,12 @@ mf.controllers.button = function(selector){
 
 // -------model?
 
-// current article
-mf.article = null
-
-
 // download and display the next article (or current on first load)
 mf.load = mf.skip = function() {
 	mf.display.wait()
 	mf.nav.disable()
 	$.ajax({
-		url: mf.article?'/next':'/current',
+		url: mf.display.article?'/next':'/current',
 		type:'GET',
 		error:function() {
 			mf.display.error('No more articles')
@@ -194,7 +195,6 @@ mf.load = mf.skip = function() {
 				mf.display.error('None left in queue')
 				ml.article = null
 			} else {
-				mf.article = article
 				mf.display.render(article)
 				mf.nav.enable()
 			}
@@ -209,7 +209,7 @@ mf.load = mf.skip = function() {
 mf.publish = function() {
 	mf.pending.decrement()
 	$.ajax({
-		url:'/publish/'+mf.article.id,
+		url:'/publish/'+mf.display.article.id,
 		type:'GET',
 		error:function() {
 			mf.display.error("None left!")
@@ -225,7 +225,7 @@ mf.publish = function() {
 mf.discard = function() {
 	mf.pending.decrement()
 	$.ajax({
-		url:'/'+mf.article.id,
+		url:'/'+mf.display.article.id,
 		type:'DELETE',
 		error:function() {
 			mf.display.error("That's it!")
@@ -239,7 +239,7 @@ mf.discard = function() {
 }
 
 mf.inspect = function() {
-	window.open(mf.article.link)
+	window.open(mf.display.article.link)
 }
 
 mf.nav = {}
