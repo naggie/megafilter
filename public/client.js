@@ -31,6 +31,8 @@ mf.init = function() {
 	mf.pending.change(function(from, to){
 		if (from == 0 && to > 0)
 			mf.load()
+
+		document.title =  '('+to+') Megafilter'
 	})
 
 	mf.nav.skip.action(mf.skip)
