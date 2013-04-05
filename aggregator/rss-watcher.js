@@ -54,7 +54,7 @@ var watch = function (params) {
 	interval.offset = 240*Math.random()
 
 	// array of pubdates to unix time, used for calculating update interval
-	var dates = []
+	var timestamps = []
 
 	// given articles (etc) see if it's new
 	// if so, and it to the public callback
@@ -71,19 +71,19 @@ var watch = function (params) {
 			if (known.length && known.indexOf(article.guid) == -1)
 				params.callback(article)
 
-			var date = (new Date(article.pubdate) ).valueOf()
+			var timestamp = (new Date(article.pubdate) ).valueOf()
 			// convert to seconds
-			date /= 1000
-			dates.push(date)
+			timestamp /= 1000
+			timestamps.push(timestamp)
 
-			// only keep 20
-			if (dates.length > 20)
-				dates.shift()
+			// only keep last 20
+			if (timestamps.length > 20)
+				timestamps.shift()
 		})
 
 		// recalculate interval (if interval was not explicitly set)
 		if (!params.interval)
-			calcInterval()
+			calcInterval(timestamps)
 
 		// GUID GARBAGE COLLECTION, EFFECTIVELY
 		// articles which have fallen off the end of the feed stack won't appear again
@@ -97,17 +97,17 @@ var watch = function (params) {
 		setTimeout(function() { parser.parseUrl(params.url,inspect) },interval.current*1000)
 	}
 
-	var calcInterval = function() {
+	// work out the average interval between the given timestamps
+	var calcInterval = function(timestamps) {
 		var periods = []
 
-		dates.forEach(function (d,i) {
-			if (dates[i+1])
-				periods.push(dates[i+1] - d)
+		timestamps.forEach(function (d,i) {
+			if (timestamps[i+1])
+				periods.push(timestamps[i+1] - d)
 		})
 
-		// remove potential outliers
+		// remove potential outliers (just the max)
 		periods.sort(function(a,b){return a-b})
-		periods.push()
 		periods.pop()
 
 		// no meaningful information, leave interval as-is
