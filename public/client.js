@@ -32,7 +32,7 @@ mf.init = function() {
 			mf.nav.enable()
 		else
 			mf.nav.disable()
-	}())
+	})
 
 	mf.nav.skip.action(mf.skip)
 	mf.nav.discard.action(mf.discard)
@@ -97,7 +97,7 @@ mf.controllers.counter = function(selector) {
 	// callback for when number changes
 	var change = function(value) {}
 	this.change = function(fn) {
-		action = fn
+		change = fn
 	}
 
 	this.set = function(number) {
