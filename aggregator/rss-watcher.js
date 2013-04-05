@@ -93,6 +93,10 @@ var watch = function (params) {
 			known.push(article.guid)
 		})
 
+		// FIXME it's a bug with feedparser
+		// when upgraded to new API this will be fixed anyway, I hope
+		parser = new fp({silent:true})
+
 		// fire at next interval (time may change, so timeout is used rather than interval)
 		setTimeout(function() { parser.parseUrl(params.url,inspect) },interval.current*1000)
 	}
