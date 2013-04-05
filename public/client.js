@@ -257,8 +257,9 @@ mf.nav.disable = function() {
 }
 
 mf.check_pending = function () {
-	$({
+	$.ajax({
 		url: '/pending',
+		type: 'GET',
 		success: function(d) {
 			mf.pending.set(d.pending)
 		}
