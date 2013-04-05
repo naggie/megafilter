@@ -1,3 +1,9 @@
+This is a personal replacement for Google reader. It's simple and suits my workflow.
+[See my blog post about it][2].
+
+[2]: http://callanbryant.co.uk/#Blog
+
+
 Remember to do a recursive clone, there are submodules. If you don't the icons won't work.
 
 	git clone --recursive https://github.com/naggie/megafilter.git
