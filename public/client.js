@@ -27,11 +27,10 @@ mf.init = function() {
 	mf.display.wait()
 
 	mf.pending = new mf.controllers.counter('#pending')
-	mf.pending.change(function(count){
-		if (count)
-			mf.nav.enable()
-		else
-			mf.nav.disable()
+	// queue refill should load article
+	mf.pending.change(function(from, to){
+		if (from == 0 && to > 0)
+			mf.load()
 	})
 
 	mf.nav.skip.action(mf.skip)
@@ -95,15 +94,17 @@ mf.controllers.counter = function(selector) {
 	var value = 0
 
 	// callback for when number changes
-	var change = function(value) {}
+	var change = function(from,to) {}
 	this.change = function(fn) {
 		change = fn
 	}
 
 	this.set = function(number) {
+		if (number == value) return;
+		// from, to
+		change(value,number)
 		ele.text(number)
 		value = number
-		change(value)
 		return this
 	}
 
