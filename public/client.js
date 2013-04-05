@@ -10,7 +10,6 @@ var mf = {}
 
 mf.init = function() {
 	// put in constructor
-	mf.nav = {}
 	mf.nav.skip    = new mf.controllers.button('#skip')
 	mf.nav.discard = new mf.controllers.button('#discard')
 	mf.nav.publish = new mf.controllers.button('#publish')
@@ -28,6 +27,12 @@ mf.init = function() {
 	mf.display.wait()
 
 	mf.pending = new mf.controllers.counter('#pending')
+	mf.pending.change(function(count){
+		if (count)
+			mf.nav.enable()
+		else
+			mf.nav.disable()
+	}())
 
 	mf.nav.skip.action(mf.skip)
 	mf.nav.discard.action(mf.discard)
@@ -87,9 +92,16 @@ mf.controllers.counter = function(selector) {
 	ele = $(selector)
 	var value = 0
 
+	// callback for when number changes
+	var change = function(value) {}
+	this.change = function(fn) {
+		action = fn
+	}
+
 	this.set = function(number) {
 		ele.text(number)
 		value = number
+		change(value)
 		return this
 	}
 
@@ -115,7 +127,6 @@ mf.controllers.button = function(selector){
 
 	// callback for when button is clicked or key is pressed
 	var action = function() {}
-
 	this.action = function(fn) {
 		action = fn
 	}
@@ -178,9 +189,7 @@ mf.load = mf.skip = function() {
 			if (!article.pending) {
 				mf.display.error('None left in queue')
 				ml.article = null
-				//mf.nav.disable()
 			} else {
-				//mf.nav.enable()
 				mf.article = article
 				mf.display.render(article)
 			}
@@ -226,4 +235,19 @@ mf.discard = function() {
 
 mf.inspect = function() {
 	window.open(mf.article.link)
+}
+
+mf.nav = {}
+mf.nav.enable = function() {
+	mf.nav.skip.enable()
+	mf.nav.discard.enable()
+	mf.nav.publish.enable()
+	mf.nav.inspect.enable()
+}
+
+mf.nav.disable = function() {
+	mf.nav.skip.disable()
+	mf.nav.discard.disable()
+	mf.nav.publish.disable()
+	mf.nav.inspect.disable()
 }
