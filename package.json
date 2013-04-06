@@ -9,6 +9,7 @@
   "dependencies": {
     "restify": "2.3.5",
     "feedparser": "0.12.0",
-    "xml2js": "0.2.6"
+    "xml2js": "0.2.6",
+    "optimist": "0.3.7"
   }
 }

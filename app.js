@@ -35,6 +35,10 @@ server.use(restify.bodyParser())
 server.use(restify.jsonp());
 //server.use(restify.gzipResponse()); // breaks page load
 
+//if (config.password)
+//	server.use(restify.authorizationParser())
+
+
 server.get('/next',function(req,res,next) {
 	var article = aggregator.next()
 	res.send(article?200:404,article)
