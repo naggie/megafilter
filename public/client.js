@@ -65,7 +65,8 @@ mf.controllers.display = function(selector) {
 		$('section.description',ele).html(article.description)
 		$('> h1 a',ele).html(article.title).attr('href',article.origlink)
 		$('time',ele).attr('datetime',article.pubdate)
-		$('.note',ele).html(article.author).prepend(' by ')
+		if (article.author) $('.note',ele).html(article.author).prepend(' by ')
+		// also do link to source site homepage
 		return this
 	}
 
@@ -96,7 +97,7 @@ mf.controllers.display = function(selector) {
 mf.controllers.counter = function(selector) {
 	ele = $(selector)
 	// count
-	var value = null
+	var value = " "
 
 	// callback for when number changes
 	var change = function(from,to) {}
