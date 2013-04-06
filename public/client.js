@@ -95,7 +95,8 @@ mf.controllers.display = function(selector) {
 // positive article counter
 mf.controllers.counter = function(selector) {
 	ele = $(selector)
-	var value = 0
+	// count
+	var value = null
 
 	// callback for when number changes
 	var change = function(from,to) {}
@@ -112,8 +113,8 @@ mf.controllers.counter = function(selector) {
 		return this
 	}
 
-	// initialise
-	this.set(value)
+	// initialise to zero without triggering change()
+	ele.text(value)
 
 	this.get = function() {
 		return value
