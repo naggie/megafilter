@@ -67,6 +67,8 @@ mf.controllers.display = function(selector) {
 		$('time',ele).attr('datetime',article.pubdate)
 		if (article.author) $('.note',ele).html(article.author).prepend(' by ')
 		// also do link to source site homepage
+		// open all article links in a new window
+		$('a',ele),attr('target','_new')
 		return this
 	}
 
