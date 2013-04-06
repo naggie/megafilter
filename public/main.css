@@ -115,3 +115,16 @@ article time {
 	left:0;
 	background:white;
 }
+/* blog hack images (tracking pixels, link text images, share buttons etc)*/
+a > img, .blog a[rel="nofollow"] img,.blog img[height="1"],.blog img[border="0"] {
+	border:0;
+	margin:0;
+	padding:0;
+	display:inline-block;
+}
+
+/* Stop IE from drawing silly dots around links */
+a:active,a:focus {
+	outline:none;
+	ie-dummy:expression(this.hideFocus=true);
+}
