@@ -117,7 +117,7 @@ mf.controllers.counter = function(selector) {
 	}
 
 	// initialise to zero without triggering change()
-	ele.text(value)
+	ele.text(0)
 
 	this.get = function() {
 		return value
