@@ -33,6 +33,7 @@ mf.init = function() {
 			mf.load()
 
 		document.title =  '('+to+') Megafilter'
+		console.log('change to',to,'from',from)
 	})
 
 	mf.nav.skip.action(mf.skip)
@@ -42,10 +43,6 @@ mf.init = function() {
 	//mf.nav.undo.action(mf.undo)
 
 	setInterval(mf.check_pending,5000)
-}
-
-mf.updatePending = function(count) {
-	$('#pending').text(count)
 }
 
 // render the next article from cache and begin to use the
@@ -123,8 +120,10 @@ mf.controllers.counter = function(selector) {
 	}
 
 	this.decrement = function() {
-		if (value > 0)
+		if (value > 0) {
 			ele.text(--value)
+			change(value+1,value)
+		}
 
 		return this
 	}
