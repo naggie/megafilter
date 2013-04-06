@@ -63,7 +63,7 @@ mf.controllers.display = function(selector) {
 		$('#loading').hide()
 		ele.css('visibility','visible')
 		$('section.description',ele).html(article.description)
-		$('> h1 a',ele).text(article.title).attr('href',article.origlink)
+		$('> h1 a',ele).html(article.title).attr('href',article.origlink)
 		$('time',ele).attr('datetime',article.pubdate)
 		$('.note',ele).html(article.author).prepend(' by ')
 		return this
