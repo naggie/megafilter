@@ -29,11 +29,7 @@ mf.init = function() {
 	mf.pending = new mf.controllers.counter('#pending')
 	// queue refill should load article
 	mf.pending.change(function(from, to){
-		if (from == 0 && to > 0)
-			mf.load()
-
 		document.title =  '('+to+') Megafilter'
-		console.log('change to',to,'from',from)
 	})
 
 	mf.nav.skip.action(mf.skip)
@@ -68,7 +64,7 @@ mf.controllers.display = function(selector) {
 		if (article.author) $('.note',ele).html(article.author).prepend(' by ')
 		// also do link to source site homepage
 		// open all article links in a new window
-		$('a',ele),attr('target','_new')
+		$('a',ele).attr('target','_new')
 		return this
 	}
 
@@ -262,11 +258,16 @@ mf.nav.disable = function() {
 	mf.nav.inspect.disable()
 }
 
+// periodically update counter and load new article if queue is re-formed
 mf.check_pending = function () {
 	$.ajax({
 		url: '/pending',
 		type: 'GET',
 		success: function(d) {
+			// queue has an item for the first time since
+			if (d.pending > 0 && mf.pending.get() == 0)
+				mf.load()
+
 			mf.pending.set(d.pending)
 		}
 	})
