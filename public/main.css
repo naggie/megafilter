@@ -63,6 +63,7 @@ nav li:active , .depressed {
 nav #pending {
 	font-size:36px;
 	margin-top:30px;
+	height:55px;
 }
 nav li.disabled {
 	opacity:0.30;
