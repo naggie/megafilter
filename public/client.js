@@ -54,6 +54,7 @@ mf.controllers.display = function(selector) {
 
 	// render a given node-feedparser article to the page
 	this.render = function(article) {
+		// clean this up FIXME
 		this.article = article
 		$('#error').hide()
 		$('#loading').hide()
@@ -62,6 +63,7 @@ mf.controllers.display = function(selector) {
 		$('> h1 a',ele).html(article.title).attr('href',article.origlink)
 		$('time',ele).attr('datetime',article.pubdate)
 		if (article.author) $('.note',ele).html(article.author).prepend(' by ')
+		if (article.source.title) $('.note',ele).prepend('<a href="'+article.source.link+'">'+article.source.title+'</a>').prepend(' from ')
 		// also do link to source site homepage
 		// open all article links in a new window
 		$('a',ele).attr('target','_new')
