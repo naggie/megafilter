@@ -76,7 +76,7 @@ var watch = function (params) {
 				}
 
 				if (!article.source.title)
-					article.source.title = article.link.match(/https?:\/\/(.+?)\./)[1]
+					article.source.title = article.link.match(/https?:\/\/(www\.)?(.+?)\./)[2]
 				if (!article.source.link)
 					article.source.link = article.link.match(/.+?\/\/.+?\//)[0]
 
