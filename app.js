@@ -42,21 +42,17 @@ server.use(function (req,res,next) {
 
 	res.header('WWW-Authenticate','Basic realm="Megafilter"')
 
-	if (!req.authorization.basic) {
-		// ask for auth, none was given
-		res.status(401)
-		res.end()
-		return next(false)
-	} else if (
+	if (!req.authorization.basic)
+		// ask for auth, none was given so 401
+		return next(new restify.InvalidCredentialsError())
+	else if (
 		req.authorization.basic.username == config.username
 		&& req.authorization.basic.password == config.password
 	)
 		return next()
-	else {
-		res.status(403)
-		res.send('Invalid credentials')
-		return next(false)
-	}
+	else
+		// 403
+		return next(new restify.NotAuthorizedError())
 })
 
 server.get('/next',function(req,res,next) {
