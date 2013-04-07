@@ -111,7 +111,7 @@ server.get(/.*/,restify.serveStatic({
 }))
 
 
-server.listen(process.env.PORT | 8080, function () {
+server.listen(config.port, function () {
 	console.log('%s listening at %s', server.name, server.url)
 })
 

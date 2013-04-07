@@ -28,4 +28,7 @@ exports.maxArticles     = 300
 exports.username = argv.username || process.env.USER
 exports.password = argv.password
 
+
+exports.port = argv.port || process.env.PORT || 8080
+
 console.log(exports)
