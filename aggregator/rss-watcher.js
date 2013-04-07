@@ -69,10 +69,16 @@ var watch = function (params) {
 			// is this article new? If so, guid is not in known
 			// also do not publish articles on first run
 			if (known.length && known.indexOf(article.guid) == -1) {
+				// better quality non-proxied link
+				if (article.origlink) {
+					article.link = article.origlink
+					delete article.origlink
+				}
+
 				if (!article.source.title)
-					article.source.title = article.origlink.match(/https?:\/\/(.+?)\./)[1]
+					article.source.title = article.link.match(/https?:\/\/(.+?)\./)[1]
 				if (!article.source.link)
-					article.source.link = article.origlink.match(/.+?\/\/.+?\//)[0]
+					article.source.link = article.link.match(/.+?\/\/.+?\//)[0]
 
 				params.callback(article)
 			}
