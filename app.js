@@ -80,7 +80,7 @@ server.get('/current',function(req,res,next) {
 })
 
 
-server.get('/publish/:id',function(req,res,next) {
+server.put('/publish/:id',function(req,res,next) {
 	var success = aggregator.publish(req.params.id)
 	res.send(success?200:404,{success:success})
 	return next()

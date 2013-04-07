@@ -213,7 +213,7 @@ mf.publish = function() {
 	mf.pending.decrement()
 	$.ajax({
 		url:'/publish/'+mf.display.article.id,
-		type:'GET',
+		type:'PUT',
 		error:function() {
 			mf.display.error("None left!")
 		},
