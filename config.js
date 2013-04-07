@@ -25,7 +25,7 @@ exports.maxArticles     = 300
 
 // specify --user optionally, defaults to username
 // specify --password optionally, defaults to nothing which disables auth
-exports.username = process.env.USER || argv.username
+exports.username = argv.username || process.env.USER
 exports.password = argv.password
 
 console.log(exports)
