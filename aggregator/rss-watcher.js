@@ -68,8 +68,14 @@ var watch = function (params) {
 		articles.forEach( function (article,i) {
 			// is this article new? If so, guid is not in known
 			// also do not publish articles on first run
-			if (known.length && known.indexOf(article.guid) == -1)
+			if (known.length && known.indexOf(article.guid) == -1) {
+				if (!article.source.title)
+					article.source.title = article.origlink.match(/https?:\/\/(.+?)\./)[1]
+				if (!article.source.link)
+					article.source.link = article.origlink.match(/.+?\/\/.+?\//)[0]
+
 				params.callback(article)
+			}
 
 			var timestamp = (new Date(article.pubdate) ).valueOf()
 			// convert to seconds
