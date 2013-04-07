@@ -56,19 +56,19 @@ Article format
 
 The same as the node-feedparser format.
 
-* title
-* description (frequently, the full article content)
-* summary (frequently, an excerpt of the article content)
-* link
-* origlink (when FeedBurner or Pheedo puts a special tracking url in the `link` property, `origlink` contains the original link)
-* date (most recent update)
-* pubdate (original published date)
-* author
-* guid (a unique identifier for the article)
-* comments (a link to the article's comments section)
-* image (an Object containing `url` and `title` properties)
-* categories (an Array of Strings)
-* source (an Object containing `url` and `title` properties pointing to the original source for an article; see the [RSS Spec](http://cyber.law.harvard.edu/rss/rss.html#ltsourcegtSubelementOfLtitemgt) for an explanation of this element)
-* enclosures (an Array of Objects, each representing a podcast or other enclosure and having a `url` property and possibly `type` and `length` properties)
-* meta (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to `article` emissions)
+* `title`
+* `description` (frequently, the full article content)
+* `summary` (frequently, an excerpt of the article content)
+* `link`
+* `origlink` (when FeedBurner or Pheedo puts a special tracking url in the `link` property, `origlink` contains the original link)
+* `date` (most recent update)
+* `pubdate` (original published date)
+* `author`
+* `guid` (a unique identifier for the article)
+* `comments` (a link to the article's comments section)
+* `image` (an Object containing `url` and `title` properties)
+* `categories` (an Array of Strings)
+* `source` (an Object containing `url` and `title` properties pointing to the original source for an article; see the [RSS Spec](http://cyber.law.harvard.edu/rss/rss.html#ltsourcegtSubelementOfLtitemgt) for an explanation of this element)
+* `enclosures` (an Array of Objects, each representing a podcast or other enclosure and having a `url` property and possibly `type` and `length` properties)
+* `meta` (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to `article` emissions)
 
