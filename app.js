@@ -35,9 +35,29 @@ server.use(restify.bodyParser())
 server.use(restify.jsonp());
 //server.use(restify.gzipResponse()); // breaks page load
 
-//if (config.password)
-//	server.use(restify.authorizationParser())
+server.use(restify.authorizationParser())
+server.use(function (req,res,next) {
+	// enabled?
+	if (!config.password) return next()
 
+	res.header('WWW-Authenticate','Basic realm="Megafilter"')
+
+	if (!req.authorization.basic) {
+		// ask for auth, none was given
+		res.status(401)
+		res.end()
+		return next(false)
+	} else if (
+		req.authorization.basic.username == config.username
+		&& req.authorization.basic.password == config.password
+	)
+		return next()
+	else {
+		res.status(403)
+		res.send('Invalid credentials')
+		return next(false)
+	}
+})
 
 server.get('/next',function(req,res,next) {
 	var article = aggregator.next()
