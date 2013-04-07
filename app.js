@@ -35,6 +35,18 @@ server.use(restify.bodyParser())
 server.use(restify.jsonp());
 //server.use(restify.gzipResponse()); // breaks page load
 
+
+// no auth for this, ever!
+server.get('/published',function(req,res,next) {
+	// limit
+	if (!req.query.count || req.query.count > config.maxArticles)
+		req.query.count = config.maxArticles
+
+	var articles = aggregator.dump(req.query.count)
+	res.send(articles.length?200:404,articles)
+	return next()
+})
+
 server.use(restify.authorizationParser())
 server.use(function (req,res,next) {
 	// enabled?
@@ -78,16 +90,6 @@ server.get('/publish/:id',function(req,res,next) {
 server.del('/:id',function(req,res,next) {
 	var success = aggregator.discard(req.params.id)
 	res.send(success?200:404,{success:success})
-	return next()
-})
-
-server.get('/articles',function(req,res,next) {
-	// limit
-	if (!req.query.count || req.query.count > config.maxArticles)
-		req.query.count = config.maxArticles
-
-	var articles = aggregator.dump(req.query.count)
-	res.send(articles.length?200:404,articles)
 	return next()
 })
 

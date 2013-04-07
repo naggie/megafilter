@@ -44,7 +44,7 @@ Discard an article from the queue.
 > `GET /publish/:id`
 Publish an article by ID from the queue (removing it).
 
-> `GET /articles`
+> `GET /published`
 Given a `count` as parameter, return published articles. 0 Means all articles, unspecified  means 30.
 
 > `GET /pending`
