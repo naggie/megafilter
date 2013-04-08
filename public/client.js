@@ -317,7 +317,7 @@ mf.check_pending = function () {
 			mf.pending.set(d.pending)
 		},
 		error: function() {
-			mf.notification.say('could not delete previous article','warning-sign').beep()
+			mf.notification.say('network error','warning-sign').beep()
 		}
 	})
 }
