@@ -40,15 +40,7 @@ mf.init = function() {
 
 	setInterval(mf.check_pending,5000)
 
-	mf.notification = $('#notification').get()[0]
-	mf.notification.sound = function() {
-		// this is necessary, otherwise it won't work more than once
-		// http://stackoverflow.com/questions/2702343/html5-audio-plays-only-once-in-my-javascript-code
-		this.load()
-		this.play()
-	}
-
-	mf.message = new mf.controllers.message('#message')
+	mf.notification = new mf.controllers.notification('#notification')
 }
 
 // render the next article from cache and begin to use the
@@ -192,8 +184,9 @@ mf.controllers.button = function(selector){
 	}
 }
 
-mf.controllers.message = function(selector) {
+mf.controllers.notification = function(selector) {
 	var ele = $(selector)
+	var beep = $('#beep').get()[0]
 
 	// timeout id for the fade out animation
 	var timeout
@@ -214,6 +207,18 @@ mf.controllers.message = function(selector) {
 			$(ele).fadeOut()
 		},2000)
 
+		// chaining
+		return this
+	}
+
+	this.beep = function() {
+		// this is necessary, otherwise it won't work more than once
+		// http://stackoverflow.com/questions/2702343/html5-audio-plays-only-once-in-my-javascript-code
+		beep.load()
+		beep.play()
+
+		// chaining
+		return this
 	}
 
 }
@@ -252,10 +257,10 @@ mf.publish = function() {
 		url:'/publish/'+mf.display.article.id,
 		type:'PUT',
 		error:function() {
-			mf.message.say('could not publish previous article','exclamation-sign')
+			mf.notification.say('could not publish previous article','exclamation-sign')
 		},
 		success:function() {
-			mf.message.say('published previous article','ok')
+			mf.notification.say('published previous article','ok')
 		}
 
 	})
@@ -268,10 +273,10 @@ mf.discard = function() {
 		url:'/'+mf.display.article.id,
 		type:'DELETE',
 		error:function() {
-			mf.message.say('could not delete previous article','exclamation-sign')
+			mf.notification.say('could not delete previous article','exclamation-sign')
 		},
 		success:function() {
-			mf.message.say('deleted previous article','ok')
+			mf.notification.say('deleted previous article','ok')
 		}
 
 	})
@@ -306,13 +311,13 @@ mf.check_pending = function () {
 			// queue has an item for the first time since
 			if (d.pending > 0 && mf.pending.get() == 0) {
 				mf.load()
-				mf.notification.sound()
+				mf.notification.say('Queue is repopulated').beep()
 			}
 
 			mf.pending.set(d.pending)
-		}
-		error = function() {
-			mf.message.say('could not delete previous article','warning-sign')
+		},
+		error: function() {
+			mf.notification.say('could not delete previous article','warning-sign').beep()
 		}
 	})
 }
