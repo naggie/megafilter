@@ -39,6 +39,14 @@ mf.init = function() {
 	//mf.nav.undo.action(mf.undo)
 
 	setInterval(mf.check_pending,5000)
+
+	mf.notification = $('#notification').get()[0]
+	mf.notification.sound = function() {
+		// this is necessary, otherwise it won't work more than once
+		// http://stackoverflow.com/questions/2702343/html5-audio-plays-only-once-in-my-javascript-code
+		this.load()
+		this.play()
+	}
 }
 
 // render the next article from cache and begin to use the
@@ -270,7 +278,7 @@ mf.check_pending = function () {
 			// queue has an item for the first time since
 			if (d.pending > 0 && mf.pending.get() == 0) {
 				mf.load()
-				$('#notification').get()[0].play()
+				mf.notification.sound()
 			}
 
 			mf.pending.set(d.pending)
