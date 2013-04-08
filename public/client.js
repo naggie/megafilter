@@ -106,7 +106,7 @@ mf.controllers.display = function(selector) {
 
 // positive article counter
 mf.controllers.counter = function(selector) {
-	ele = $(selector)
+	var ele = $(selector)
 	// count
 	var value = " "
 
@@ -193,7 +193,7 @@ mf.controllers.button = function(selector){
 }
 
 mf.controllers.message = function(selector) {
-	ele = $(selector)
+	var ele = $(selector)
 
 	// timeout id for the fade out animation
 	var timeout
