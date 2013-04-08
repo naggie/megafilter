@@ -255,7 +255,7 @@ mf.publish = function() {
 			mf.display.error("None left!")
 		},
 		success:function() {
-			mf.message.say('Previous article was published','ok')
+			mf.message.say('published previous article','ok')
 		}
 
 	})
@@ -271,7 +271,7 @@ mf.discard = function() {
 			mf.display.error("That's it!")
 		},
 		success:function() {
-			mf.message.say('Previous article was deleted','trash')
+			mf.message.say('deleted previous article','ok')
 			console.log('wtf')
 		}
 
