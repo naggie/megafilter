@@ -62,6 +62,7 @@ mf.controllers.display = function(selector) {
 		$('section.description',ele).html(article.description)
 		$('> h1 a',ele).html(article.title).attr('href',article.link)
 		$('time',ele).attr('datetime',article.pubdate)
+		$('.note',ele).empty()
 		if (article.author) $('.note',ele).html(article.author).prepend(' by ')
 		if (article.source.title) $('.note',ele).prepend('<a href="'+article.source.link+'">'+article.source.title+'</a>').prepend(' from ')
 		// also do link to source site homepage
