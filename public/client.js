@@ -268,8 +268,10 @@ mf.check_pending = function () {
 		type: 'GET',
 		success: function(d) {
 			// queue has an item for the first time since
-			if (d.pending > 0 && mf.pending.get() == 0)
+			if (d.pending > 0 && mf.pending.get() == 0) {
 				mf.load()
+				$('#notification').get()[0].play()
+			}
 
 			mf.pending.set(d.pending)
 		}
