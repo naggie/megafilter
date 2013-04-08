@@ -1,4 +1,8 @@
+![screenshot](screenshot.png)
+
+
 This is a personal replacement for Google reader. It's simple and suits my workflow.
+
 [See my blog post about it][2].
 
 [2]: http://callanbryant.co.uk/#Blog
