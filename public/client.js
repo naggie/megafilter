@@ -252,7 +252,7 @@ mf.publish = function() {
 		url:'/publish/'+mf.display.article.id,
 		type:'PUT',
 		error:function() {
-			mf.display.error("None left!")
+			mf.message.say('could not publish previous article','exclamation-sign')
 		},
 		success:function() {
 			mf.message.say('published previous article','ok')
@@ -268,11 +268,10 @@ mf.discard = function() {
 		url:'/'+mf.display.article.id,
 		type:'DELETE',
 		error:function() {
-			mf.display.error("That's it!")
+			mf.message.say('could not delete previous article','exclamation-sign')
 		},
 		success:function() {
 			mf.message.say('deleted previous article','ok')
-			console.log('wtf')
 		}
 
 	})
@@ -311,6 +310,9 @@ mf.check_pending = function () {
 			}
 
 			mf.pending.set(d.pending)
+		}
+		error = function() {
+			mf.message.say('could not delete previous article','warning-sign')
 		}
 	})
 }
