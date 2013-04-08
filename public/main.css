@@ -104,16 +104,24 @@ article time, .note {
 article time {
 	margin-left:22px;
 }
-#error {
-	position:fixed;
-	display:none;
-	font-size:40px;
+
+#message {
+	top:15px;
+	position:absolute;
 	color:gray;
 	right:100px;
 	text-align:center;
-	top:44%;
 	left:0;
-	background:white;
+}
+
+#error {
+	position:fixed;
+	font-size:40px;
+	top:44%;
+	color:gray;
+	right:100px;
+	text-align:center;
+	left:0;
 }
 /* blog hack images (tracking pixels, link text images, share buttons etc)*/
 a > img, .blog a[rel="nofollow"] img,.blog img[height="1"],.blog img[border="0"] {

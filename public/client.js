@@ -47,6 +47,8 @@ mf.init = function() {
 		this.load()
 		this.play()
 	}
+
+	mf.message = new mf.controllers.message('#message')
 }
 
 // render the next article from cache and begin to use the
@@ -190,6 +192,32 @@ mf.controllers.button = function(selector){
 	}
 }
 
+mf.controllers.message = function(selector) {
+	ele = $(selector)
+
+	// timeout id for the fade out animation
+	var timeout
+
+	// set the message, optionally specifying an icon from font awesome,
+	// without icon- prefix
+	this.say = function(msg,icon) {
+		if (!arguments[1])
+			var icon = 'info-sign'
+
+		var icon = $('<i />').addClass('icon-'+icon)
+		ele.stop(1).show().html(msg).prepend(' ').prepend(icon)
+
+		// another message pending? don't want it's replacement to fade too quick
+		clearTimeout(timeout)
+		// new extended time
+		timeout = setTimeout(function(){
+			$(ele).fadeOut()
+		},2000)
+
+	}
+
+}
+
 // -------model?
 
 // download and display the next article (or current on first load)
@@ -227,7 +255,7 @@ mf.publish = function() {
 			mf.display.error("None left!")
 		},
 		success:function() {
-			console.log('Published article')
+			mf.message.say('Previous article was published','ok')
 		}
 
 	})
@@ -243,7 +271,8 @@ mf.discard = function() {
 			mf.display.error("That's it!")
 		},
 		success:function() {
-			console.log('Deleted article')
+			mf.message.say('Previous article was deleted','trash')
+			console.log('wtf')
 		}
 
 	})
