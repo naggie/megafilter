@@ -209,7 +209,7 @@ mf.controllers.notification = function(selector) {
 		clearTimeout(timeout)
 		// new extended time
 		timeout = setTimeout(function(){
-			$(ele).fadeOut(400)
+			$(ele).fadeOut(300)
 		},2500)
 
 		// may as well log in console
