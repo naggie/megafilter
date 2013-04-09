@@ -237,6 +237,9 @@ mf.controllers.notification = function(selector) {
 
 }
 
+// last deleted or published article (MUST BE A CLONE)
+mf.trash = {}
+
 // -------model?
 
 // download and display the next article (or current on first load)
@@ -271,7 +274,7 @@ mf.publish = function() {
 		url:'/publish/'+mf.display.article.id,
 		type:'PUT',
 		error:function() {
-			mf.notification.say('could not publish previous article','exclamation-sign')
+			mf.notification.say('could not publish previous article','exclamation-sign').beep()
 		},
 		success:function() {
 			mf.notification.say('published previous article','ok')
@@ -282,12 +285,15 @@ mf.publish = function() {
 }
 
 mf.discard = function() {
+	// clone old article to trash
+	mf.trash = $.extend({},mf.display.article)
+
 	mf.pending.decrement()
 	$.ajax({
 		url:'/'+mf.display.article.id,
 		type:'DELETE',
 		error:function() {
-			mf.notification.say('could not delete previous article','exclamation-sign')
+			mf.notification.say('could not delete previous article','exclamation-sign').beep()
 		},
 		success:function() {
 			mf.notification.say('deleted previous article','ok')
@@ -299,6 +305,27 @@ mf.discard = function() {
 
 mf.inspect = function() {
 	window.open(mf.display.article.link)
+}
+
+mf.undiscard = function() {
+	// clone old article to trash
+	mf.trash = $.extend({},mf.display.article)
+	mf.notification.say('restoring article to queue...','spinner icon-spin').persist()
+
+	mf.pending.decrement()
+	$.ajax({
+		url:'/'+mf.display.article.id,
+		type:'POST',
+		data: mf.trash,
+		error:function() {
+			mf.notification.say('could not restore discarded article','exclamation-sign').beep()
+		},
+		success:function() {
+			mf.notification.say('sucessfully restored article to queue','ok')
+		}
+
+	})
+	mf.load()
 }
 
 mf.nav = {}
@@ -325,7 +352,7 @@ mf.check_pending = function () {
 			// queue has an item for the first time since
 			if (d.pending > 0 && mf.pending.get() == 0) {
 				mf.load()
-				mf.notification.say('Queue is repopulated').beep()
+				mf.notification.say('new article in queue').beep()
 			}
 
 			mf.pending.set(d.pending)
