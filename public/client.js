@@ -226,6 +226,12 @@ mf.controllers.notification = function(selector) {
 		return this
 	}
 
+	// chain: make the message persistent (CALL AFTER say() IN CHAIN)
+	this.persist = function() {
+		clearTimeout(timeout)
+		return this
+	}
+
 }
 
 // -------model?
