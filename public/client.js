@@ -203,7 +203,13 @@ mf.controllers.notification = function(selector) {
 			var icon = 'info-sign'
 
 		var icon = $('<i />').addClass('icon-'+icon)
-		ele.stop(1).show().html(msg).prepend(' ').prepend(icon)
+		ele.stop(1).html(msg).prepend(' ').prepend(icon)
+
+		// hide and show again, so that similar messages can be reidentified
+		ele.hide()
+		setTimeout(function() {
+			ele.show()
+		},1)
 
 		// another message pending? don't want it's replacement to fade too quick
 		clearTimeout(timeout)
