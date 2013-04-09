@@ -67,14 +67,17 @@ server.use(function (req,res,next) {
 		return next(new restify.NotAuthorizedError())
 })
 
-server.get('/next',function(req,res,next) {
-	var article = aggregator.next()
-	res.send(article?200:404,article)
-	return next()
-})
+server.get(/\/(next|current)/,function(req,res,next) {
+	// first match will be 'next' or 'current'
+	// which allows merging both methods into one handler
+	// by calling aggregator.next() or aggregator.current()
+	var article = aggregator[req.params[0]]()
 
-server.get('/current',function(req,res,next) {
-	var article = aggregator.current()
+	// do not cache this, Mr. Browser
+	res.header('Expires',0)
+	res.header('Cache-Control','no-cache, no-store, must-revalidate')
+	res.header('Pragma','no-cache')
+
 	res.send(article?200:404,article)
 	return next()
 })
