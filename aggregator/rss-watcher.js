@@ -75,10 +75,12 @@ var watch = function (params) {
 					delete article.origlink
 				}
 
-				if (!article.source.title)
-					article.source.title = article.link.match(/https?:\/\/(www\.)?(.+?)\./)[2]
-				if (!article.source.link)
-					article.source.link = article.link.match(/.+?\/\/.+?\//)[0]
+				if (article.link) {
+					if (!article.source.title)
+						article.source.title = article.link.match(/https?:\/\/(www\.)?(.+?)\./)[2]
+					if (!article.source.link)
+						article.source.link = article.link.match(/.+?\/\/.+?\//)[0]
+				}
 
 				params.callback(article)
 			}
