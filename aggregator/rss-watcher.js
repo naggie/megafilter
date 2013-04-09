@@ -76,10 +76,14 @@ var watch = function (params) {
 				}
 
 				if (article.link) {
-					if (!article.source.title)
-						article.source.title = article.link.match(/https?:\/\/(www\.)?(.+?)\./)[2]
-					if (!article.source.link)
-						article.source.link = article.link.match(/.+?\/\/.+?\//)[0]
+					if (!article.source.title) {
+						var matches = article.link.match(/https?:\/\/(www\.)?(.+?)\./)
+						if (matches) article.source.title = matches[2]
+					}
+					if (!article.source.link) {
+						var matches = article.link.match(/.+?\/\/.+?\//)
+						if (matches) article.source.link = matches[0]
+					}
 				}
 
 				params.callback(article)
