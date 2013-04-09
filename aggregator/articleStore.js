@@ -28,7 +28,7 @@ var json  = function (params) {
 	var file = params.file || __dirname+'/../starred.json';
 
 	// save interval, default 5mins, in seconds
-	var saveInterval = params.saveInterval | 60*5
+	var saveInterval = params.saveInterval || 60*5
 
 	// articles saved
 	var articles = []
