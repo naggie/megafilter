@@ -212,6 +212,9 @@ mf.controllers.notification = function(selector) {
 			$(ele).fadeOut(400)
 		},2500)
 
+		// may as well log in console
+		console.log(msg)
+
 		// chaining
 		return this
 	}
