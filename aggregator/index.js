@@ -34,13 +34,15 @@ exports.watchRssFeeds = function(urls) {
 			url:url,
 			callback:function(article) {
 				exports.enqueue(article)
-				exports.newArticle(article)
+				exports.hooks.enqueue(article)
 			}
 		})
 	})
 }
 
-exports.newArticle = function(article){}
+exports.hooks = {}
+exports.hooks.enqueue = function(article){}
+exports.hooks.publish = function(article){}
 
 exports.next    = function() {
 	var article = queue.next()
@@ -62,9 +64,10 @@ exports.discard = function(id) {
 
 exports.publish = function(id) {
 	var article = queue.extract(id)
-	if (article)
+	if (article) {
+		exports.hooks.publish(article)
 		return !!store.save(article)
-	else
+	} else
 		return false
 }
 

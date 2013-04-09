@@ -140,8 +140,3 @@ fs.readFile(config.subscriptions, function(err, data) {
 		aggregator.watchRssFeeds(urls)
 	})
 })
-
-
-aggregator.newArticle = function(article) {
-	console.log('New article:', article.title)
-}
