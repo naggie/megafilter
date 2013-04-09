@@ -31,7 +31,7 @@ var server = restify.createServer({
 
 server.use(restify.acceptParser(server.acceptable))
 server.use(restify.queryParser())
-server.use(restify.bodyParser())
+server.use(restify.bodyParser({mapParams: false})) // req.body is then JSON content
 server.use(restify.jsonp());
 //server.use(restify.gzipResponse()); // breaks page load
 
@@ -97,6 +97,12 @@ server.get('/pending',function(req,res,next) {
 	res.send({
 		pending:aggregator.pending()
 	})
+	return next()
+})
+
+server.post('/enqueue',function(req,res,next) {
+	var success = aggregator.enqueue(req.body)
+	res.send({success:success})
 	return next()
 })
 
