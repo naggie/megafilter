@@ -68,7 +68,7 @@ var watch = function (params) {
 		articles.forEach( function (article,i) {
 			// is this article new? If so, guid is not in known
 			// also do not publish articles on first run
-			if (known.indexOf(article.guid) == -1) {
+			if (known.length && known.indexOf(article.guid) == -1) {
 				// better quality non-proxied link
 				if (article.origlink) {
 					article.link = article.origlink
