@@ -74,8 +74,9 @@ var internal = function (params) {
 		return articles[index]
 	}
 
+
 	// remove an article from the queue, preserving the order
-	this.extract = function(id){
+	this.discard = function(id){
 		// look for the article index, given the ID
 		// 'i' is set to invalid index if not found
 		for (var i=0; i <= articles.length; i++)
@@ -86,8 +87,19 @@ var internal = function (params) {
 		if (i < index)
 			index--
 
-		// remove the article, returning if exists
-		return articles.splice(i,1)[0]
+		// remove the article, returning success
+		return !!articles.splice(i,1)[0]
+	}
+
+	// read an article from the queue, leaving it there
+	this.get = function(id) {
+		// look for the article index, given the ID
+		// 'i' is set to invalid index if not found
+		for (var i=0; i <= articles.length; i++)
+			if (i==articles.length  || articles[i].id == id)
+				break;
+
+		return articles[i]
 	}
 
 	// number of articles in queue

@@ -284,14 +284,14 @@ mf.publish = function() {
 		url:'/publish/'+mf.display.article.id,
 		type:'PUT',
 		error:function() {
-			mf.notification.say('could not publish previous article','exclamation-sign').beep()
+			mf.notification.say('could not publish article','exclamation-sign').beep()
 		},
 		success:function() {
-			mf.notification.say('published previous article','ok')
+			mf.notification.say('published article','ok')
+			mf.nav.publish.disable()
 		}
 
 	})
-	mf.load()
 }
 
 mf.discard = function() {
@@ -331,10 +331,10 @@ mf.undiscard = function(callback) {
 		type:'POST',
 		data: mf.trash,
 		error:function() {
-			mf.notification.say('could not restore discarded article','exclamation-sign').beep()
+			mf.notification.say('could not restore previous article','exclamation-sign').beep()
 		},
 		success:function() {
-			mf.notification.say('sucessfully restored article to queue','ok')
+			mf.notification.say('sucessfully restored previous article to queue','ok')
 			mf.pending.increment()
 			mf.nav.undo.disable()
 			callback()

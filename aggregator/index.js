@@ -59,11 +59,11 @@ exports.current = function() {
 }
 
 exports.discard = function(id) {
-	return !!queue.extract(id)
+	return queue.discard(id)
 }
 
 exports.publish = function(id) {
-	var article = queue.extract(id)
+	var article = queue.get(id)
 	if (article) {
 		exports.hooks.publish(article)
 		return !!store.save(article)
