@@ -315,6 +315,7 @@ mf.discard = function() {
 
 mf.unpublish = function() {
 	mf.notification.say('retracting article','spinner icon-spin').persist()
+	mf.nav.undo.disable()
 
 	$.ajax({
 		url:'/published/'+mf.display.article.id,
@@ -324,7 +325,6 @@ mf.unpublish = function() {
 		},
 		success:function() {
 			mf.notification.say('article retracted','ok')
-			mf.nav.undo.disable()
 		}
 	})
 }
@@ -337,7 +337,8 @@ mf.inspect = function() {
 mf.undiscard = function() {
 	// clone old article to trash
 	mf.trash = $.extend({},mf.display.article)
-	mf.notification.say('restoring article to queue...','spinner icon-spin').persist()
+	mf.notification.say('restoring previous article to queue...','spinner icon-spin').persist()
+	mf.nav.undo.disable()
 
 	$.ajax({
 		url:'/enqueue',
@@ -349,7 +350,6 @@ mf.undiscard = function() {
 		success:function() {
 			mf.notification.say('sucessfully restored previous article to queue','ok')
 			mf.pending.increment()
-			mf.nav.undo.disable()
 		}
 
 	})
