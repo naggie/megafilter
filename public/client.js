@@ -349,6 +349,8 @@ mf.undiscard = function() {
 		},
 		success:function() {
 			mf.notification.say('sucessfully restored previous article to queue','ok')
+			// load article on restore to empty queue
+			if (mf.pending.get() == 0) mf.load()
 			mf.pending.increment()
 		}
 
