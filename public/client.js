@@ -132,6 +132,13 @@ mf.controllers.counter = function(selector) {
 
 		return this
 	}
+
+	this.increment = function() {
+		ele.text(++value)
+		change(value+1,value)
+
+		return this
+	}
 }
 
 // navigation buttons (sort of like a view controller)
@@ -307,14 +314,13 @@ mf.inspect = function() {
 	window.open(mf.display.article.link)
 }
 
-mf.undiscard = function() {
+mf.undiscard = function(callback) {
 	// clone old article to trash
 	mf.trash = $.extend({},mf.display.article)
 	mf.notification.say('restoring article to queue...','spinner icon-spin').persist()
 
-	mf.pending.decrement()
 	$.ajax({
-		url:'/'+mf.display.article.id,
+		url:'/enqueue',
 		type:'POST',
 		data: mf.trash,
 		error:function() {
@@ -322,10 +328,11 @@ mf.undiscard = function() {
 		},
 		success:function() {
 			mf.notification.say('sucessfully restored article to queue','ok')
+			mf.pending.increment()
+			if (arguments[0]) callback()
 		}
 
 	})
-	mf.load()
 }
 
 mf.nav = {}
