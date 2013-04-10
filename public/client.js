@@ -319,6 +319,8 @@ mf.undiscard = function(callback) {
 	mf.trash = $.extend({},mf.display.article)
 	mf.notification.say('restoring article to queue...','spinner icon-spin').persist()
 
+	if (!arguments[0]) callback = function(){}
+
 	$.ajax({
 		url:'/enqueue',
 		type:'POST',
@@ -329,7 +331,7 @@ mf.undiscard = function(callback) {
 		success:function() {
 			mf.notification.say('sucessfully restored article to queue','ok')
 			mf.pending.increment()
-			if (arguments[0]) callback()
+			callback()
 		}
 
 	})
