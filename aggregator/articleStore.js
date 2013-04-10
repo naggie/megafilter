@@ -54,6 +54,15 @@ var json  = function (params) {
 
 	// save an article
 	this.save = function(article) {
+		// must have ID
+		if (!article.id)
+			return false
+
+		// check is unique
+		for (var i in articles)
+			if (articles[i].id == article.id)
+				return false
+
 		articles.push(article)
 		return changed = true
 	}
@@ -64,5 +73,13 @@ var json  = function (params) {
 			return articles
 		else
 			return articles.slice(-count)
+	}
+
+	this.discard = function(id) {
+		for (var i in articles)
+			if (articles[i].id == article.id)
+				return !!articles.splice(i,1)[0]
+
+		return false
 	}
 }
