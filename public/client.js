@@ -36,7 +36,6 @@ mf.init = function() {
 	mf.nav.discard.action(mf.discard)
 	mf.nav.publish.action(mf.publish)
 	mf.nav.inspect.action(mf.inspect)
-	//mf.nav.undo.action(mf.undo)
 
 	setInterval(mf.check_pending,5000)
 
@@ -256,6 +255,7 @@ mf.trash = {}
 mf.load = mf.skip = function() {
 	mf.display.wait()
 	mf.nav.disable()
+	mf.nav.undo.disable()
 	$.ajax({
 		url: mf.display.article?'/next':'/current',
 		type:'GET',
@@ -307,6 +307,7 @@ mf.discard = function() {
 		},
 		success:function() {
 			mf.notification.say('deleted previous article','ok')
+			mf.nav.undo.enable().action(mf.undiscard)
 		}
 
 	})
@@ -335,6 +336,7 @@ mf.undiscard = function(callback) {
 		success:function() {
 			mf.notification.say('sucessfully restored article to queue','ok')
 			mf.pending.increment()
+			mf.nav.undo.disable()
 			callback()
 		}
 
