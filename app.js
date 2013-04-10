@@ -90,8 +90,14 @@ server.put('/publish/:id',function(req,res,next) {
 })
 
 
-server.del('/:id',function(req,res,next) {
+server.del('/queue/:id',function(req,res,next) {
 	var success = aggregator.discard(req.params.id)
+	res.send(success?200:404,{success:success})
+	return next()
+})
+
+server.del('/published/:id',function(req,res,next) {
+	var success = aggregator.unpublish(req.params.id)
 	res.send(success?200:404,{success:success})
 	return next()
 })

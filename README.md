@@ -42,17 +42,25 @@ Get the next article. Returns `article` and `pending` count.
 > `GET /current`
 Get the current article (good for first load) returns `article` and `pending` count.
 
-> `DELETE /:id`
-Discard an article from the queue. 
+> `DELETE /queue/:id`
+Discard an article from the queue.
 
-> `GET /publish/:id`
-Publish an article by ID from the queue (removing it).
+> `PUT /publish/:id`
+Publish an article by ID from the queue.
 
 > `GET /published`
 Given a `count` as parameter, return published articles. 0 Means all articles, unspecified  means 30.
 
 > `GET /pending`
 Gives the current number of articles pending
+
+> `DELETE /published/:id`
+Delete an article from the published collection
+
+> `POST /enqueue`
+Remotely adds an article to the queue.
+
+
 
 
 Article format

@@ -77,7 +77,7 @@ var json  = function (params) {
 
 	this.discard = function(id) {
 		for (var i in articles)
-			if (articles[i].id == article.id)
+			if (articles[i].id == id)
 				return !!articles.splice(i,1)[0]
 
 		return false

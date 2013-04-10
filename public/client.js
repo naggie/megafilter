@@ -288,7 +288,7 @@ mf.publish = function() {
 		},
 		success:function() {
 			mf.notification.say('published article','ok')
-			mf.nav.publish.disable()
+			mf.nav.undo.enable().action(mf.unpublish)
 		}
 
 	})
@@ -300,7 +300,7 @@ mf.discard = function() {
 
 	mf.pending.decrement()
 	$.ajax({
-		url:'/'+mf.display.article.id,
+		url:'/queue/'+mf.display.article.id,
 		type:'DELETE',
 		error:function() {
 			mf.notification.say('could not delete previous article','exclamation-sign').beep()
@@ -309,9 +309,24 @@ mf.discard = function() {
 			mf.notification.say('deleted previous article','ok')
 			mf.nav.undo.enable().action(mf.undiscard)
 		}
-
 	})
 	mf.load()
+}
+
+mf.unpublish = function() {
+	mf.notification.say('retracting article','spinner icon-spin').persist()
+
+	$.ajax({
+		url:'/published/'+mf.display.article.id,
+		type:'DELETE',
+		error:function() {
+			mf.notification.say('could not undo publish','exclamation-sign').beep()
+		},
+		success:function() {
+			mf.notification.say('article retracted','ok')
+			mf.nav.undo.disable()
+		}
+	})
 }
 
 mf.inspect = function() {
@@ -319,12 +334,10 @@ mf.inspect = function() {
 }
 
 // restore last extracted article to queue
-mf.undiscard = function(callback) {
+mf.undiscard = function() {
 	// clone old article to trash
 	mf.trash = $.extend({},mf.display.article)
 	mf.notification.say('restoring article to queue...','spinner icon-spin').persist()
-
-	if (!arguments[0]) callback = function(){}
 
 	$.ajax({
 		url:'/enqueue',
@@ -337,7 +350,6 @@ mf.undiscard = function(callback) {
 			mf.notification.say('sucessfully restored previous article to queue','ok')
 			mf.pending.increment()
 			mf.nav.undo.disable()
-			callback()
 		}
 
 	})

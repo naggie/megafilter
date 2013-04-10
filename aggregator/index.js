@@ -71,6 +71,7 @@ exports.publish = function(id) {
 		return false
 }
 
-exports.enqueue = queue.enqueue
-exports.dump    = store.dump
-exports.pending = queue.pending
+exports.enqueue   = queue.enqueue
+exports.dump      = store.dump
+exports.pending   = queue.pending
+exports.unpublish = store.discard
