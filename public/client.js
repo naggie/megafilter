@@ -17,7 +17,7 @@ mf.init = function() {
 	mf.nav.undo    = new mf.controllers.button('#undo')
 
 	mf.nav.skip.bind('right').bind('j').bind('s')
-	mf.nav.discard.bind('x').bind('d').bind('space')
+	mf.nav.discard.bind('x').bind('d')
 	mf.nav.publish.bind('p')
 	mf.nav.inspect.bind('i')
 	mf.nav.undo.bind('u').bind('ctrl+z')
