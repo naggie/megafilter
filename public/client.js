@@ -58,7 +58,7 @@ mf.controllers.display = function(selector) {
 		$('body').scrollTop(0)
 		// clean this up FIXME
 		this.article = article
-		$('#error').hide()
+		$('#placeholder').hide()
 		$('#loading').hide()
 		ele.css('visibility','visible')
 		$('section.description',ele).html(article.description)
@@ -83,15 +83,15 @@ mf.controllers.display = function(selector) {
 	this.wait = function(){
 		$('#loading').show()
 		discard()
-		$('#error').hide()
+		$('#placeholder').hide()
 		return this
 	}
 
-	// show 'error' message
-	this.error = function(msg) {
+	// show a message in place of the article
+	this.placeholder = function(msg) {
 		$('#loading').hide()
 		discard()
-		$('#error').show().text(msg)
+		$('#placeholder').show().text(msg)
 		return this
 	}
 }
@@ -260,17 +260,11 @@ mf.load = mf.skip = function() {
 		url: mf.display.article?'/next':'/current',
 		type:'GET',
 		error:function() {
-			mf.display.error('No more articles')
+			mf.display.placeholder('No more articles')
 		},
 		success:function(article) {
-			if (!article.pending) {
-				mf.display.error('None left in queue')
-				ml.article = null
-			} else {
-				mf.display.render(article)
-				mf.nav.enable()
-			}
-
+			mf.display.render(article)
+			mf.nav.enable()
 			mf.pending.set(article.pending)
 		}
 
