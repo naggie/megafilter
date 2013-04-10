@@ -41,7 +41,7 @@ var json  = function (params) {
 		articles = JSON.parse( fs.readFileSync(file,{encoding:'utf8'}) )
 
 	// save it every 5 minutes or so IF CHANGED
-	setTimeout(function() {
+	setInterval(function() {
 		if (!changed) return;
 		changed = false;
 
