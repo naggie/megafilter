@@ -46,11 +46,18 @@ var internal = function (params) {
 		if (!article.id)
 			article.id = articleHash(article)
 
+		// check is unique
+		for (var i in articles)
+			if (articles[i].id == article.id)
+				return false
+
 		// add new article to start of array
 		articles.unshift(article)
 
 		if (articles.length > max)
 			articles.pop()
+
+		return true
 	}
 
 	// return an article from the (circular) queue

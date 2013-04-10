@@ -56,6 +56,7 @@ mf.controllers.display = function(selector) {
 
 	// render a given node-feedparser article to the page
 	this.render = function(article) {
+		$('body').scrollTop(0)
 		// clean this up FIXME
 		this.article = article
 		$('#error').hide()
@@ -209,6 +210,8 @@ mf.controllers.notification = function(selector) {
 		if (!arguments[1])
 			var icon = 'info-sign'
 
+		$('body').scrollTop(0)
+
 		var icon = $('<i />').addClass('icon-'+icon)
 		ele.stop(1).show().html(msg).prepend(' ').prepend(icon)
 
@@ -314,6 +317,7 @@ mf.inspect = function() {
 	window.open(mf.display.article.link)
 }
 
+// restore last extracted article to queue
 mf.undiscard = function(callback) {
 	// clone old article to trash
 	mf.trash = $.extend({},mf.display.article)
