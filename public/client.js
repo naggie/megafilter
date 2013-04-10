@@ -279,7 +279,6 @@ mf.load = mf.skip = function() {
 }
 
 mf.publish = function() {
-	mf.pending.decrement()
 	$.ajax({
 		url:'/publish/'+mf.display.article.id,
 		type:'PUT',
