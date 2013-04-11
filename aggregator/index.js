@@ -77,3 +77,4 @@ exports.pending   = queue.pending
 exports.unpublish = store.discard
 exports.store     = store
 exports.queue     = queue
+exports.articleHash = require('./articleQueue').articleHash

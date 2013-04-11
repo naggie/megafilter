@@ -85,14 +85,17 @@ var json  = function (params) {
 	}
 
 	// write to disk
-	this.save = function() {
+	this.save = function(callback) {
 		if (!changed) return;
 		changed = false;
+		if (!arguments[0])
+			callback = function(){}
 
 		var json = JSON.stringify(articles)
 		fs.writeFile(file,json,{encoding:'utf8'},function(err) {
 			if (err) console.err(err)
 			console.log('Saved '+articles.length+' starred items')
+			callback()
 		})
 	}
 

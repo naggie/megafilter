@@ -21,6 +21,7 @@ var fs      = require('fs')
 
 var aggregator = require('./aggregator')
 
+console.log(config)
 
 var server = restify.createServer({
 	name: 'megafilter',
