@@ -67,7 +67,7 @@ var json  = function (params) {
 
 	// dump n latest articles (0 for all)
 	this.dump = function(count) {
-		if (count == 0)
+		if (count <= 0)
 			return articles
 		else
 			return articles.slice(0,count)

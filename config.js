@@ -19,8 +19,8 @@ exports.store = 'json'
 exports.subscriptions = __dirname+'/subscriptions.xml'
 
 
-// maximum number of articles
-exports.maxArticles     = 300
+// maximum number of articles via /published API call
+exports.maxArticles     = 50
 
 
 // specify --user optionally, defaults to username

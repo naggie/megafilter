@@ -39,11 +39,14 @@ server.use(restify.jsonp());
 
 // no auth for this, ever!
 server.get('/published',function(req,res,next) {
-	// limit
-	if (!req.query.count || req.query.count > config.maxArticles)
-		req.query.count = config.maxArticles
+	var count = req.query.count
 
-	var articles = aggregator.dump(req.query.count)
+	// limit
+	if (!count || count > config.maxArticles || count <= 0)
+		count = config.maxArticles
+
+	var articles = aggregator.dump(count)
+
 	res.send(articles.length?200:404,articles)
 	return next()
 })
