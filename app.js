@@ -115,7 +115,7 @@ server.get('/pending',function(req,res,next) {
 
 server.post('/enqueue',function(req,res,next) {
 	var success = aggregator.enqueue(req.body)
-	res.send({success:success})
+	res.send(success?200:500,{success:success})
 	return next()
 })
 
