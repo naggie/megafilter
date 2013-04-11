@@ -216,7 +216,11 @@ mf.controllers.notification = function(selector) {
 		$('body').scrollTop(0)
 
 		var icon = $('<i />').addClass('icon-'+icon)
-		ele.stop(1).show().html(msg).prepend(' ').prepend(icon)
+
+		// cancel animation if pending and show again
+		ele.stop(1).show().css('opacity',1)
+
+		ele.html(msg).prepend(' ').prepend(icon)
 
 		// another message pending? don't want it's replacement to fade too quick
 		clearTimeout(timeout)
