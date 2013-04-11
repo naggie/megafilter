@@ -33,10 +33,10 @@ mf.init = function() {
 		document.title =  '('+to+') Megafilter'
 
 		// is there another article to skip to?
-		if (to < 2 && from >= 2)
+		if (to < 2)
 			mf.nav.skip.disable()
 		// skip is always disabled before a load, always enable if valid
-		else if (to >= 2)
+		else
 			mf.nav.skip.enable()
 	})
 
@@ -114,7 +114,6 @@ mf.controllers.counter = function(selector) {
 	}
 
 	this.set = function(number) {
-		if (number == value) return;
 		// from, to
 		change(value,number)
 		ele.text(number)
