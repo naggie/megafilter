@@ -35,7 +35,8 @@ mf.init = function() {
 		// is there another article to skip to?
 		if (to < 2 && from >= 2)
 			mf.nav.skip.disable()
-		else if (to >= 2 && from < 2)
+		// skip is always disabled before a load, always enable if valid
+		else if (to >= 2)
 			mf.nav.skip.enable()
 	})
 
