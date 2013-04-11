@@ -14,7 +14,7 @@ if (argv.starred) {
 		var item    = items[i]
 		var article = {}
 
-		article.pubdate      = (new Date(item.published)).toString()
+		article.pubdate      = (new Date(item.published*1000)).toString()
 		article.title        = item.title
 		article.author       = item.author
 		article.source       = {

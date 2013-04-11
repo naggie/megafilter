@@ -86,10 +86,10 @@ var json  = function (params) {
 
 	// write to disk
 	this.save = function(callback) {
-		if (!changed) return;
+		if (!arguments[0]) callback = function(){}
+		if (!changed) return callback()
+
 		changed = false;
-		if (!arguments[0])
-			callback = function(){}
 
 		var json = JSON.stringify(articles)
 		fs.writeFile(file,json,{encoding:'utf8'},function(err) {
