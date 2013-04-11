@@ -202,10 +202,10 @@ mf.controllers.notification = function(selector) {
 	// timeout id for the fade out animation
 	var timeout
 
-	// user may have interest, or may want to click and fire attached event
-	ele.on('mouseenter',function(){
-		clearTimeout(timeout)
-	})
+	// user may have interest
+	//ele.on('mouseenter',function(){
+	//	clearTimeout(timeout)
+	//})
 
 	// set the message, optionally specifying an icon from font awesome,
 	// without icon- prefix
