@@ -328,8 +328,6 @@ mf.inspect = function() {
 
 // restore last extracted article to queue
 mf.undiscard = function() {
-	// clone old article to trash
-	mf.trash = $.extend({},mf.display.article)
 	mf.notification.say('restoring previous article to queue...','spinner icon-spin').persist()
 	mf.nav.undo.disable()
 
