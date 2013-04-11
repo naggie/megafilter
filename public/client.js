@@ -9,7 +9,8 @@ $(function(){
 var mf = {}
 
 mf.init = function() {
-	// put in constructor
+	mf.nav = {}
+
 	mf.nav.skip    = new mf.controllers.button('#skip')
 	mf.nav.discard = new mf.controllers.button('#discard')
 	mf.nav.publish = new mf.controllers.button('#publish')
@@ -30,6 +31,12 @@ mf.init = function() {
 	// queue refill should load article
 	mf.pending.change(function(from, to){
 		document.title =  '('+to+') Megafilter'
+
+		// is there another article to skip to?
+		if (to < 2 && from >= 2)
+			mf.nav.skip.disable()
+		else if (to >= 2 && from < 2)
+			mf.nav.skip.enable()
 	})
 
 	mf.nav.skip.action(mf.skip)
@@ -41,9 +48,6 @@ mf.init = function() {
 
 	mf.notification = new mf.controllers.notification('#notification')
 }
-
-// render the next article from cache and begin to use the
-mf.next = function() {}
 
 mf.controllers = {}
 
@@ -253,9 +257,20 @@ mf.trash = {}
 
 // download and display the next article (or current on first load)
 mf.load = mf.skip = function() {
+	// remove article, show loading animation
 	mf.display.wait()
-	mf.nav.disable()
+
+	// article operations not valid during loading
+	mf.nav.discard.disable()
+	mf.nav.publish.disable()
+	mf.nav.inspect.disable()
+
+	// undo has lost its context
 	mf.nav.undo.disable()
+
+	// do not want to load another article whilst this one is pending
+	mf.nav.skip.disable()
+
 	$.ajax({
 		url: mf.display.article?'/next':'/current',
 		type:'GET',
@@ -264,8 +279,14 @@ mf.load = mf.skip = function() {
 		},
 		success:function(article) {
 			mf.display.render(article)
-			mf.nav.enable()
+
+			// this will also set whether skip is possible
 			mf.pending.set(article.pending)
+
+			// re-enable article operations
+			mf.nav.discard.enable()
+			mf.nav.publish.enable()
+			mf.nav.inspect.enable()
 		}
 
 
@@ -348,20 +369,6 @@ mf.undiscard = function() {
 	})
 }
 
-mf.nav = {}
-mf.nav.enable = function() {
-	mf.nav.skip.enable()
-	mf.nav.discard.enable()
-	mf.nav.publish.enable()
-	mf.nav.inspect.enable()
-}
-
-mf.nav.disable = function() {
-	mf.nav.skip.disable()
-	mf.nav.discard.disable()
-	mf.nav.publish.disable()
-	mf.nav.inspect.disable()
-}
 
 // periodically update counter and load new article if queue is re-formed
 mf.check_pending = function () {
