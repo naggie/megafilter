@@ -277,7 +277,7 @@ mf.publish = function() {
 		url:'/publish/'+mf.display.article.id,
 		type:'PUT',
 		error:function() {
-			mf.notification.say('could not publish article','exclamation-sign').beep()
+			mf.notification.say('article already published','exclamation-sign').beep()
 		},
 		success:function() {
 			mf.notification.say('published article','ok')
