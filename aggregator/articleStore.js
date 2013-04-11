@@ -40,9 +40,6 @@ var json  = function (params) {
 	if (fs.existsSync(file))
 		articles = JSON.parse( fs.readFileSync(file,{encoding:'utf8'}) )
 
-	// save it every 5 minutes or so IF CHANGED
-	setInterval(this.save, saveInterval*1000)
-
 	// save an article
 	this.insert = function(article) {
 		// must have ID
@@ -85,4 +82,7 @@ var json  = function (params) {
 			console.log('Saved '+articles.length+' starred items')
 		})
 	}
+
+	// save it every 5 minutes or so IF CHANGED
+	setInterval(this.save, saveInterval*1000)
 }
