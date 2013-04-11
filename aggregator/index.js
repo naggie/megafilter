@@ -75,3 +75,5 @@ exports.enqueue   = queue.enqueue
 exports.dump      = store.dump
 exports.pending   = queue.pending
 exports.unpublish = store.discard
+exports.store     = store
+exports.queue     = queue

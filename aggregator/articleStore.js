@@ -51,7 +51,7 @@ var json  = function (params) {
 			if (articles[i].id == article.id)
 				return false
 
-		articles.push(article)
+		articles.unshift(article)
 		return changed = true
 	}
 
