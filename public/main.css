@@ -79,16 +79,17 @@ nav li i {
 nav li.disabled i {
 	cursor:default;
 }
-#loading {
+#loading,#placeholder {
 	color:gray;
 	position:fixed;
 	top:50%; left:0;
 	text-align:center;
-	height:40px;
+	height:32px;
 	width:100%;
 	z-index:-999;
-	margin:-20px 0 0 -36px;
+	margin:-16px 0 0 -36px;
 	font-size:40px;
+	opacity:0.3;
 }
 a {
 	color:#84bc2b;
@@ -116,15 +117,6 @@ article time {
 	left:0;
 }
 
-#placeholder {
-	position:fixed;
-	font-size:30px;
-	top:44%;
-	right:100px;
-	text-align:center;
-	left:0;
-	opacity:0.2;
-}
 /* blog hack images (tracking pixels, link text images, share buttons etc)*/
 a > img, .blog a[rel="nofollow"] img,.blog img[height="1"],.blog img[border="0"] {
 	border:0;
