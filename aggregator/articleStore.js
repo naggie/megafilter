@@ -15,7 +15,7 @@
 */
 
 // actors to store and dump articles for publishing
-// must implement at least insert, dump, discard
+// must implement at least insert, dump, discard and save
 
 var fs = require('fs')
 exports.json  = function(params) {return new json(params)}
@@ -26,9 +26,6 @@ var json  = function (params) {
 
 	// file to save/load
 	var file = params.file || __dirname+'/../published.json';
-
-	// save interval, default 5mins, in seconds
-	var saveInterval = params.saveInterval || 60*5
 
 	// articles saved
 	var articles = []
@@ -98,7 +95,4 @@ var json  = function (params) {
 			callback()
 		})
 	}
-
-	// save it every 5 minutes or so IF CHANGED
-	setInterval(this.save, saveInterval*1000)
 }

@@ -43,10 +43,8 @@ if (argv.starred) {
 	else
 		console.log('All articles sucessfully imported!')
 
-	if (aggregator.store.save) {
-		console.log('Saving...')
-		aggregator.store.save(process.exit)
-	}
+	console.log('Saving...')
+	aggregator.store.save()
 }
 
 

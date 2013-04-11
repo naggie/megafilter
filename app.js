@@ -156,3 +156,8 @@ fs.readFile(config.subscriptions, function(err, data) {
 		aggregator.watchRssFeeds(urls)
 	})
 })
+
+
+// save interval, default 5mins, in seconds
+var saveInterval = config.saveInterval || 60*5
+setInterval(aggregator.store.save,saveInterval)
