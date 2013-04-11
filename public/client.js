@@ -61,7 +61,7 @@ mf.controllers.display = function(selector) {
 		$('#placeholder').hide()
 		$('#loading').hide()
 		ele.css('visibility','visible')
-		$('section.description',ele).html(article.description)
+		$('section.description',ele).html(article.description || article.summary)
 		$('> h1 a',ele).html(article.title).attr('href',article.link)
 		$('time',ele).attr('datetime',article.pubdate)
 		$('.note',ele).empty()

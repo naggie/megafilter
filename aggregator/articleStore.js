@@ -40,18 +40,31 @@ var json  = function (params) {
 	if (fs.existsSync(file))
 		articles = JSON.parse( fs.readFileSync(file,{encoding:'utf8'}) )
 
-	// save an article
+	// save an article, in order based on pubdate
 	this.insert = function(article) {
-		// must have ID
-		if (!article.id)
+		// must have ID, pubdate
+		if (!article.id || !article.pubdate)
 			return false
+
+		var pubdate = new Date(article.pubdate)
 
 		// check is unique
 		for (var i in articles)
 			if (articles[i].id == article.id)
 				return false
 
-		articles.unshift(article)
+		// insert it into the correct place (articles are already sorted from new to old)
+		for (var i in articles)
+			if ( pubdate > (new Date(articles[i].pubdate)) ) {
+				// article is newer than this position
+				articles.splice(i,0,article)
+				break
+			}
+
+		// perhaps it's older than all the articles, if so, put it in the end
+		if (pubdate < (new Date(articles[articles.length-1].pubdate)))
+			articles.push(article)
+
 		return changed = true
 	}
 
