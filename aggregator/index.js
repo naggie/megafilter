@@ -66,7 +66,7 @@ exports.publish = function(id) {
 	var article = queue.get(id)
 	if (article) {
 		exports.hooks.publish(article)
-		return !!store.save(article)
+		return !!store.insert(article)
 	} else
 		return false
 }

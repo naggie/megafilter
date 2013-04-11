@@ -15,9 +15,9 @@
 */
 
 // actors to store and dump articles for publishing
+// must implement at least insert, dump, discard
 
 var fs = require('fs')
-
 exports.json  = function(params) {return new json(params)}
 //exports.sqlite = function(params) {return new sqlite(params)}
 var json  = function (params) {
@@ -41,19 +41,10 @@ var json  = function (params) {
 		articles = JSON.parse( fs.readFileSync(file,{encoding:'utf8'}) )
 
 	// save it every 5 minutes or so IF CHANGED
-	setInterval(function() {
-		if (!changed) return;
-		changed = false;
-
-		var json = JSON.stringify(articles)
-		fs.writeFile(file,json,{encoding:'utf8'},function(err) {
-			if (err) console.err(err)
-			console.log('Saved '+articles.length+' starred items')
-		})
-	}, saveInterval*1000)
+	setInterval(this.save, saveInterval*1000)
 
 	// save an article
-	this.save = function(article) {
+	this.insert = function(article) {
 		// must have ID
 		if (!article.id)
 			return false
@@ -81,5 +72,17 @@ var json  = function (params) {
 				return !!articles.splice(i,1)[0]
 
 		return false
+	}
+
+	// write to disk
+	this.save = function() {
+		if (!changed) return;
+		changed = false;
+
+		var json = JSON.stringify(articles)
+		fs.writeFile(file,json,{encoding:'utf8'},function(err) {
+			if (err) console.err(err)
+			console.log('Saved '+articles.length+' starred items')
+		})
 	}
 }
