@@ -60,7 +60,7 @@ var json  = function (params) {
 		if (count == 0)
 			return articles
 		else
-			return articles.slice(-count)
+			return articles.slice(0,count)
 	}
 
 	this.discard = function(id) {
