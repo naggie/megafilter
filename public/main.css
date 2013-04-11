@@ -80,14 +80,15 @@ nav li.disabled i {
 	cursor:default;
 }
 #loading {
+	color:gray;
 	position:fixed;
-	top:0; left:0;
-	background:url('loading.gif') no-repeat center;
-	height:100%;
+	top:50%; left:0;
+	text-align:center;
+	height:40px;
 	width:100%;
-	outline:1px solid red;
 	z-index:-999;
-	margin:0 0 0 -36px;
+	margin:-20px 0 0 -36px;
+	font-size:40px;
 }
 a {
 	color:#84bc2b;
