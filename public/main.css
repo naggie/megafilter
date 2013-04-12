@@ -87,7 +87,7 @@ nav li.disabled i {
 #loading,#placeholder {
 	color:gray;
 	position:fixed;
-	top:50%; left:0;
+	top:40%; left:0;
 	text-align:center;
 	height:32px;
 	width:100%;
