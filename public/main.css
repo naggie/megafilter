@@ -14,7 +14,7 @@ article {
 	box-shadow:2px 2px 1px gray;
 	background:white;
 }
-article img {
+article img,article iframe{
 	max-width:100%;
 	height:inherit;
 	text-align:center;
@@ -22,6 +22,11 @@ article img {
 	display:block;
 	margin:40px auto;
 }
+
+article iframe {
+	height:450px; /*16:9 video*/
+}
+
 nav {
 	position:fixed;
 	right:0;
