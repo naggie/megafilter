@@ -307,6 +307,7 @@ mf.publish = function() {
 		success:function() {
 			mf.notification.say('published article','ok')
 			mf.nav.undo.enable().action(mf.unpublish)
+			mf.nav.publish.disable()
 		}
 
 	})
@@ -343,6 +344,7 @@ mf.unpublish = function() {
 		},
 		success:function() {
 			mf.notification.say('article retracted','ok')
+			mf.nav.publish.enable()
 		}
 	})
 }
