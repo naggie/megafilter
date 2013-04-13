@@ -38,11 +38,6 @@ var internal = function (params) {
 
 	// add an Article to the queue, creating id: as hash if not there
 	this.enqueue = function(article) {
-		// stop next() from returning a dupe
-		// index must correspond to the same article
-		if (articles.length)
-			index++
-
 		if (!article.id)
 			article.id = articleHash(article)
 
@@ -50,6 +45,11 @@ var internal = function (params) {
 		for (var i in articles)
 			if (articles[i].id == article.id)
 				return false
+
+		// stop next() from returning a dupe
+		// index must correspond to the same article
+		if (articles.length)
+			index++
 
 		// add new article to start of array
 		articles.unshift(article)
