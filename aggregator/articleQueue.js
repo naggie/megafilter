@@ -15,7 +15,7 @@
 */
 
 
-// article (circular) queue actors.
+// article (circular FIFO) queue actors.
 var crypto = require('crypto')
 
 exports.internal = function(params) {return new internal(params)}
@@ -37,6 +37,7 @@ var internal = function (params) {
 	var articles = []
 
 	// add an Article to the queue, creating id: as hash if not there
+	// must appear next in queue!
 	this.enqueue = function(article) {
 		if (!article.id)
 			article.id = articleHash(article)
@@ -46,13 +47,8 @@ var internal = function (params) {
 			if (articles[i].id == article.id)
 				return false
 
-		// stop next() from returning a dupe
-		// index must correspond to the same article
-		if (articles.length)
-			index++
-
-		// add new article to start of array
-		articles.unshift(article)
+		// add new article to index + 1, so it appears next
+		articles.splice(i+1,0,article)
 
 		if (articles.length > max)
 			articles.pop()
