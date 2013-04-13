@@ -47,8 +47,8 @@ var internal = function (params) {
 			if (articles[i].id == article.id)
 				return false
 
-		// add new article to index + 1, so it appears next
-		articles.splice(i+1,0,article)
+		// add new article, make it appear next
+		articles.splice(index+1,0,article)
 
 		if (articles.length > max)
 			articles.pop()
