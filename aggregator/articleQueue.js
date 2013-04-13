@@ -51,7 +51,7 @@ var internal = function (params) {
 		articles.splice(index+1,0,article)
 
 		if (articles.length > max)
-			articles.pop()
+			articles.splice(index,1)
 
 		return true
 	}
