@@ -1,5 +1,15 @@
 // allow some options to come from the command line
-var argv = require('optimist').argv
+var argv = require('optimist')
+	.usage('Usage: megafilter --subscriptions subscriptions.xml\nUsage: megafilter-import --google-starred starred.json')
+	.demand(['subscriptions'])
+	.default({
+		user : process.env.USER,
+		port : 8080,
+		//subscriptions : 'subscriptions.xml'
+	})
+	.describe('subscriptions','Google reader exported subscriptions.xml file')
+	.describe('password','setting a password will enable authentication')
+	.argv
 
 // queue actor
 exports.queue = 'internal'
@@ -16,7 +26,7 @@ exports.store = 'json'
 //...
 
 // XML file containing (OPML) RSS/ATOM feed URLs from google reader
-exports.subscriptions = __dirname+'/subscriptions.xml'
+exports.subscriptions = argv.subscriptions || __dirname+'/subscriptions.xml'
 
 
 // maximum number of articles via /published API call
