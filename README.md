@@ -12,7 +12,7 @@ Remember to do a recursive clone, there are submodules. If you don't the icons w
 
 	git clone --recursive https://github.com/naggie/megafilter.git
 	cd megafilter/
-	# copy subscriptions.xml from your google reader takout here
+	# copy subscriptions.xml from your google reader takeout to here
 	npm install
 	node app
 	open http://localhost:8080
@@ -20,16 +20,21 @@ Remember to do a recursive clone, there are submodules. If you don't the icons w
 The idea is that you run this on your own server. You can specify a PORT via
 the environment variable or `--port`. [Setcap can be used][1] to run from port 80 without sudo
 
+There will be a subscriptions manager soon.
 
 You can specify `--password <password>` to require auth. A `--username` can be
 set, but this defaults to the executing user.
 
+If you want to import starred items, **before the server is started,** run:
+
+	node import --google-starred starred.json
+
+using the file from the takeout.
+
+
+
 
 [1]: http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
-
-
-Authentication will come soon, as will a way to import your starred items in to
-an SQLite database.
 
 
 
