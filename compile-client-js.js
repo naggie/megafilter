@@ -9,7 +9,7 @@ console.log('Compiling megafilter client...')
 
 var result = uglifyjs.minify([
 	__dirname+"/public/jquery-1.9.1.js",
-	__dirname+"/public/hotkeys/jquery.hotkeys.js",
+	__dirname+"/public/jquery.hotkeys.js",
 	__dirname+"/public/client.js"
 ])
 

@@ -1,6 +1,0 @@
-[submodule "public/font-awesome"]
-	path = public/font-awesome
-	url = https://github.com/FortAwesome/Font-Awesome.git
-[submodule "public/hotkeys"]
-	path = public/hotkeys
-	url = https://github.com/jeresig/jquery.hotkeys.git
