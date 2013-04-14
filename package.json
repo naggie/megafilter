@@ -1,15 +1,29 @@
 {
-  "name": "megafilter",
-  "version": "0.0.1",
-  "private": true,
-  "author" : "Callan Bryant <callan.bryant@gmail.com> (http://callanbryant.co.uk/)",
-  "scripts": {
-    "start": "node app"
-  },
-  "dependencies": {
-    "restify": "2.3.5",
-    "feedparser": "0.12.0",
-    "xml2js": "0.2.6",
-    "optimist": "0.3.7"
-  }
+	"name": "megafilter",
+	"homepage": "http://callanbryant.co.uk/megafilter/",
+	"keywords": ["google reader","rss","aggregator"],
+	"version": "0.1.1",
+	"author" : "Callan Bryant <callan.bryant@gmail.com> (http://callanbryant.co.uk/)",
+	"scripts": {
+		"start": "node app"
+	},
+	"dependencies": {
+		"restify": "2.3.5",
+		"feedparser": "0.12.0",
+		"xml2js": "0.2.6",
+		"optimist": "0.3.7"
+	},
+	"bugs": {
+		"url" : "https://github.com/naggie/megafilter/issues"
+	},
+	"license" : "Apache",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/naggie/megafilter.git"
+	},
+	"bin" : {
+		"megafilter" : "./app.js",
+		"megafilter-import" : "./import.js"
+	},
+	"preferGlobal" : true
 }

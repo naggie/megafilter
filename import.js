@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*
    Copyright 2013 Callan Bryant <callan.bryant@gmail.com>
 
