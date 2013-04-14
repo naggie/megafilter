@@ -1,4 +1,4 @@
-![screenshot](screenshot.png)
+![screenshot](http://callanbryant.co.uk/images/megafilter.png)
 
 
 This is a personal replacement for Google reader. It's simple and suits my workflow.
