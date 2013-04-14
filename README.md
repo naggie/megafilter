@@ -94,12 +94,14 @@ Acknowledgements
 
 Megafilter would not have been possible without the following awesome projects:
 
-  * [node feedparser][3]
-  * [jQuery hotkeys][4]
-  * [Font Awesome][5]
+  * [node feedparser][3]: Used to understand RSS feeds
+  * [jQuery hotkeys][4]: Used for the keyboard shorcuts
+  * [Font Awesome][5]: used for the UI graphics
   * [jQuery][6]
+  * [node restify][7]: Used for the RESTful JSON API, and UI serving
 
 [3]: https://github.com/danmactough/node-feedparser
 [4]: https://github.com/jeresig/jquery.hotkeys
 [5]: http://fortawesome.github.io/Font-Awesome/
 [6]: http://jquery.com
+[7]: http://mcavage.github.io/node-restify/
