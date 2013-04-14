@@ -80,8 +80,10 @@ var internal = function (params) {
 				break;
 
 		// repair index if affected
-		if (i < index)
+		if (index && i <= index)
 			index--
+		else
+			index = index.length-1
 
 		// remove the article, returning success
 		return !!articles.splice(i,1)[0]

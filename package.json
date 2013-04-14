@@ -3,7 +3,7 @@
 	"homepage": "http://callanbryant.co.uk/megafilter/",
 	"description" : "a personal google reader replacement",
 	"keywords": ["google reader","rss","aggregator"],
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"author" : "Callan Bryant <callan.bryant@gmail.com> (http://callanbryant.co.uk/)",
 	"scripts": {
 		"start": "node app"
