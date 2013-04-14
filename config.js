@@ -1,7 +1,6 @@
 // allow some options to come from the command line
 var argv = require('optimist')
 	.usage('Usage: megafilter --subscriptions subscriptions.xml\nUsage: megafilter-import --google-starred starred.json')
-	.demand(['subscriptions'])
 	.default({
 		user : process.env.USER,
 		port : 8080,
