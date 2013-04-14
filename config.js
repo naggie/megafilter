@@ -9,6 +9,12 @@ var argv = require('optimist')
 	})
 	.describe('subscriptions','Google reader exported subscriptions.xml file')
 	.describe('password','setting a password will enable authentication')
+	.describe('port','port to listen on')
+	.describe('username','username for auth, defaults to current user')
+	.alias('subscriptions','s')
+	.alias('password','p')
+	.alias('username','u')
+	.alias('port','P')
 	.argv
 
 // queue actor
