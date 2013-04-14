@@ -13,6 +13,9 @@
 		"xml2js": "0.2.6",
 		"optimist": "0.3.7"
 	},
+	"devDependencies": {
+		"uglify-js": "*"
+	},
 	"bugs": {
 		"url" : "https://github.com/naggie/megafilter/issues"
 	},
