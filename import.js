@@ -19,8 +19,8 @@ var aggregator = require('./aggregator')
 var argv = require('optimist').argv
 var fs = require('fs')
 
-if (argv.google-starred) {
-	var items = JSON.parse(fs.readFileSync(argv.starred) ).items
+if (argv['google-starred']) {
+	var items = JSON.parse(fs.readFileSync(argv['google-starred']) ).items
 
 	console.log('Importing',items.length,'articles from google reader')
 
@@ -65,7 +65,7 @@ if (argv.google-starred) {
 }
 
 
-if (argv.google-subscriptions)
+if (argv['google-subscriptions'])
 	console.log('Import of subscriptions not yet supported. Can load from it.')
 
 
