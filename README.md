@@ -8,13 +8,9 @@ This is a personal replacement for Google reader. It's simple and suits my workf
 [2]: http://callanbryant.co.uk/#Blog
 
 
-Remember to do a recursive clone, there are submodules. If you don't the icons won't work.
-
-	git clone --recursive https://github.com/naggie/megafilter.git
-	cd megafilter/
+	sudo npm install -g megafilter
 	# copy subscriptions.xml from your google reader takeout to here
-	npm install
-	node app
+	node app -s sumscriptions.xml
 	open http://localhost:8080
 
 The idea is that you run this on your own server. You can specify a PORT via
@@ -27,7 +23,7 @@ set, but this defaults to the executing user.
 
 If you want to import starred items, **before the server is started,** run:
 
-	node import --google-starred starred.json
+	megafilter-import --google-starred starred.json
 
 using the file from the takeout.
 
