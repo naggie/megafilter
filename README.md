@@ -9,25 +9,18 @@ This is a personal replacement for Google reader. It's simple and suits my workf
 
 
 	sudo npm install -g megafilter
-	# copy subscriptions.xml from your google reader takeout to here
-	node app -s sumscriptions.xml
+	# copy subscriptions.xml and starred.json from your google reader takeout to here
+	node app -s subscriptions.xml --import-greader-starred starred.json
 	open http://localhost:8080
 
 The idea is that you run this on your own server. You can specify a PORT via
 the environment variable or `--port`. [Setcap can be used][1] to run from port 80 without sudo
 
-There will be a subscriptions manager soon.
+There will be a subscriptions manager soon. For the mean time, always start the
+server with `-s subscriptions.xml`. Note that you only need to import once!
 
 You can specify `--password <password>` to require auth. A `--username` can be
 set, but this defaults to the executing user.
-
-If you want to import starred items, **before the server is started,** run:
-
-	megafilter-import --google-starred starred.json
-
-using the file from the takeout.
-
-
 
 
 [1]: http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l

@@ -1,8 +1,9 @@
 {
 	"name": "megafilter",
 	"homepage": "http://callanbryant.co.uk/megafilter/",
+	"description" : "a personal google reader replacement",
 	"keywords": ["google reader","rss","aggregator"],
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"author" : "Callan Bryant <callan.bryant@gmail.com> (http://callanbryant.co.uk/)",
 	"scripts": {
 		"start": "node app"
@@ -25,8 +26,7 @@
 		"url": "https://github.com/naggie/megafilter.git"
 	},
 	"bin" : {
-		"megafilter" : "./app.js",
-		"megafilter-import" : "./import.js"
+		"megafilter" : "./app.js"
 	},
 	"preferGlobal" : true
 }

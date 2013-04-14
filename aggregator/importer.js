@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /*
    Copyright 2013 Callan Bryant <callan.bryant@gmail.com>
 
@@ -15,12 +14,14 @@
    limitations under the License.
 */
 
-var aggregator = require('./aggregator')
-var argv = require('optimist').argv
 var fs = require('fs')
+var crypto = require('crypto')
 
-if (argv['google-starred']) {
-	var items = JSON.parse(fs.readFileSync(argv['google-starred']) ).items
+
+// FOR NOW SET STORE VIA EXPORTS FIXME
+
+exports.google_reader_starred = function(file) {
+	var items = JSON.parse(fs.readFileSync(file) ).items
 
 	console.log('Importing',items.length,'articles from google reader')
 
@@ -47,9 +48,9 @@ if (argv['google-starred']) {
 		article.description  = item.content && item.content.content
 		article.summary      = item.summary && item.summary.content
 
-		article.id = aggregator.articleHash(article)
+		article.id = articleHash(article)
 
-		if (aggregator.store.insert(article) ) {
+		if (exports.store.insert(article) ) {
 			count++
 			process.stdout.write("Imported "+ count +"/"+items.length+" articles\r")
 		}
@@ -61,12 +62,15 @@ if (argv['google-starred']) {
 		console.log('All articles sucessfully imported!')
 
 	console.log('Saving...')
-	aggregator.store.save()
+	exports.store.save()
 }
 
 
-if (argv['google-subscriptions'])
-	console.log('Import of subscriptions not yet supported. Can load from it.')
 
-
+// returns hex. hash of article
+var articleHash = exports.articleHash = function(article) {
+	var hash = crypto.createHash('md5')
+	hash.update(article.title+article.guid+article.link)
+	return hash.digest('hex')
+}
 

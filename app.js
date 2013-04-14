@@ -15,20 +15,20 @@
    limitations under the License.
 */
 
-var config  = require('./config')
-var restify = require('restify')
-var xml2js  = require('xml2js')
-var fs      = require('fs')
+var config   = require('./config')
+var restify  = require('restify')
+var xml2js   = require('xml2js')
+var fs       = require('fs')
 
 var aggregator = require('./aggregator')
+var importer   = aggregator.importer
 
-console.log(config)
 
 var server = restify.createServer({
 	name: 'megafilter',
 	//certificate:'string',
 	//key:'string',
-	version: '0.0.1'
+	//version: '0.0.1'
 })
 
 server.use(restify.acceptParser(server.acceptable))
@@ -140,6 +140,15 @@ if (!fs.existsSync(config.subscriptions)) {
 	process.exit(2)
 }
 
+
+// imports
+if (config.argv['import-greader-starred'])
+	importer.google_reader_starred(config.argv['import-greader-starred'])
+
+
+
+
+// REPLACE WITH SUBSCRIPTIONS MANAGER, importing this
 // load subscriptions file
 var parser = new xml2js.Parser();
 fs.readFile(config.subscriptions, function(err, data) {

@@ -1,15 +1,17 @@
 // allow some options to come from the command line
 var argv = require('optimist')
-	.usage('Usage: megafilter --subscriptions subscriptions.xml\nUsage: megafilter-import --google-starred starred.json')
+	.usage('Usage: megafilter --subscriptions subscriptions.xml')
 	.default({
 		user : process.env.USER,
 		port : 8080,
 		//subscriptions : 'subscriptions.xml'
 	})
+	.demand(['subscriptions'])
 	.describe('subscriptions','Google reader exported subscriptions.xml file')
 	.describe('password','setting a password will enable authentication')
 	.describe('port','port to listen on')
 	.describe('username','username for auth, defaults to current user')
+	.describe('import-greader-starred','import you starred google reader items to published feed')
 	.alias('subscriptions','s')
 	.alias('password','p')
 	.alias('username','u')
@@ -45,3 +47,5 @@ exports.password = argv.password
 
 
 exports.port = argv.port || process.env.PORT || 8080
+
+exports.argv = argv

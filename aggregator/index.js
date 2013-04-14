@@ -14,6 +14,8 @@
    limitations under the License.
 */
 
+
+// must accept config somehow else FIXME
 config = require('../config')
 
 // TODO: article validator
@@ -24,6 +26,11 @@ config = require('../config')
 // load chosen actors
 queue  = require('./articleQueue')[config.queue](config)
 store  = require('./articleStore')[config.store](config)
+
+exports.importer = require('./importer')
+exports.importer.store = store // hack: FIXME
+
+
 
 watcher = require('./rss-watcher')
 
