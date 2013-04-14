@@ -89,3 +89,17 @@ The same as the node-feedparser format.
 * `enclosures` (an Array of Objects, each representing a podcast or other enclosure and having a `url` property and possibly `type` and `length` properties)
 * `meta` (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to `article` emissions)
 
+Acknowledgements
+----------------
+
+Megafilter would not have been possible without the following awesome projects:
+
+  * [node feedparser][3]
+  * [jQuery hotkeys][4]
+  * [Font Awesome][5]
+  * [jQuery][6]
+
+[3]: https://github.com/danmactough/node-feedparser
+[4]: https://github.com/jeresig/jquery.hotkeys
+[5]: http://fortawesome.github.io/Font-Awesome/
+[6]: http://jquery.com
