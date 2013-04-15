@@ -294,6 +294,10 @@ mf.load = mf.skip = function() {
 	$.ajax({
 		url: mf.display.article?'/next':'/current',
 		type:'GET',
+		data: {
+			// despite setting headers, somehow a 404 is cached
+			nocache: Math.random()
+		},
 		error:function() {
 			mf.display.placeholder('No more articles')
 		},
