@@ -14,13 +14,18 @@ This is a personal replacement for Google reader. It's simple and suits my workf
 	open http://localhost:8080
 
 The idea is that you run this on your own server. You can specify a PORT via
-the environment variable or `--port`. [Setcap can be used][1] to run from port 80 without sudo
+the environment variable or `--port`. [Setcap can be used][1] to run from port
+80 without sudo
 
 There will be a subscriptions manager soon. For the mean time, always start the
 server with `-s subscriptions.xml`. Note that you only need to import once!
 
 You can specify `--password <password>` to require auth. A `--username` can be
 set, but this defaults to the executing user.
+
+
+By default megafilter will save the published items to
+`~/megafilter-published.json`. You can change this directory with `--store-dir`
 
 
 [1]: http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
