@@ -1,7 +1,13 @@
+This is a personal replacement for Google reader. It's simple and suits my workflow.
+
+Please let people know about it. I would love for this to become popular. If you have any
+questions please contact me using callan.bryant@gmail.com.
+
+**State: Very beta but working very well!** I have migrated from Google reader to Megafilter.
+
+
 ![screenshot](http://callanbryant.co.uk/images/megafilter.png)
 
-
-This is a personal replacement for Google reader. It's simple and suits my workflow.
 
 [See my blog post about it][2].
 
