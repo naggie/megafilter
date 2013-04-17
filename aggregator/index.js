@@ -19,17 +19,15 @@
 config = require('../config')
 
 // TODO: article validator
-// TODO: may have to change to async with callbacks
-// TODO: queue/store may have to return pending and article at once
-// above is so that redis and sqlite (async) can be implemented
+// TODO: may have to change to async with callbacks (store only)
+// so that redis and sqlite (async) can be implemented
 
 // load chosen actors
-queue  = require('./articleQueue')[config.queue](config)
-store  = require('./articleStore')[config.store](config)
+queue  = require('./articleQueue').internal(config)
+store  = require('./articleStore')[config.store.actor](config.store)
 
 exports.importer = require('./importer')
 exports.importer.store = store // hack: FIXME
-
 
 
 watcher = require('./rss-watcher')

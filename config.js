@@ -21,19 +21,19 @@ var argv = require('optimist')
 	.alias('port','P')
 	.argv
 
-// queue actor
-exports.queue = 'internal'
-//exports.queue = 'redis'
 
+
+exports.dir = argv.dir || process.env.HOME
 
 // storage (published articles) actor
-exports.store = 'json'
-//exports.store = 'redis'
-//exports.store = 'sqlite'
+exports.store = {
+	actor: 'json',
+	//actor: 'sqlite',
+	//actor: 'redis',
+	file: exports.dir+'/megafilter-published.json',
+}
 
 
-// ACTOR CONFIG
-//...
 
 // XML file containing (OPML) RSS/ATOM feed URLs from google reader
 exports.subscriptions = argv.subscriptions || __dirname+'/subscriptions.xml'
@@ -48,11 +48,6 @@ exports.maxArticles     = 50
 exports.username = argv.username || process.env.USER
 exports.password = argv.password
 
-
 exports.port = argv.port || process.env.PORT || 8080
-
-// dir to save starred items FIXME
-exports.dir = argv.dir || process.env.HOME
-exports.file = exports.dir+'/megafilter-published.json'
 
 exports.argv = argv
