@@ -32,7 +32,7 @@ questions please contact me using callan.bryant@gmail.com.
 
 	sudo npm install -g megafilter
 	# copy subscriptions.xml and starred.json from your google reader takeout to here
-	node app -s subscriptions.xml --import-greader-starred starred.json
+	megafilter -s subscriptions.xml --import-greader-starred starred.json
 	open http://localhost:8080
 
 The idea is that you run this on your own server. You can specify a PORT via
