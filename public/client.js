@@ -299,7 +299,7 @@ mf.load = mf.skip = function() {
 			nocache: Math.random()
 		},
 		error:function() {
-			mf.display.placeholder('No more articles')
+			mf.display.placeholder('Waiting for new articles')
 		},
 		success:function(article) {
 			mf.display.render(article)

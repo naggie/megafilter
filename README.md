@@ -50,6 +50,10 @@ By default megafilter will save the published items to
 `~/megafilter-published.json`. You can change this directory with `--store-dir`
 
 
+When running, ~megafilter will wait for new articles. You may have to wait a
+bit! A backfill option will be added.
+
+
 [1]: http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
 
 
