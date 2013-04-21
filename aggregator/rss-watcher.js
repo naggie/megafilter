@@ -85,7 +85,7 @@ var watch = function (params) {
 			// is this article new? If so, guid is not in known
 			// also do not publish articles on first run
 			// OR BACKFILL
-			if (timestamp*1000 > since.valueOf() || known.length && known.indexOf(article.guid) == -1) {
+			if ((timestamp*1000 > since.valueOf() && ! known.length) || known.length && known.indexOf(article.guid) == -1) {
 				// better quality non-proxied link
 				if (article.origlink) {
 					article.link = article.origlink
