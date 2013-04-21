@@ -40,7 +40,8 @@ exports.watchRssFeeds = function(urls) {
 			callback:function(article) {
 				exports.enqueue(article)
 				exports.hooks.enqueue(article)
-			}
+			},
+			since: config.since
 		})
 	})
 }

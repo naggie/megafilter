@@ -1,11 +1,12 @@
 // allow some options to come from the command line
 var argv = require('optimist')
-	.usage('Usage: megafilter --subscriptions subscriptions.xml')
+	.usage('Usage: megafilter --s subscriptions.xml')
 	.default({
 		user : process.env.USER,
 		port : 8080,
 		//subscriptions : 'subscriptions.xml'
-		'store-dir' : process.cwd()
+		'store-dir' : process.cwd(),
+		'backfill'  : 0,
 	})
 	.demand(['subscriptions'])
 	.describe('subscriptions','Google reader exported subscriptions.xml file')
@@ -14,10 +15,12 @@ var argv = require('optimist')
 	.describe('username','username for auth, defaults to current user')
 	.describe('import-greader-starred','import you starred google reader items to published feed')
 	.describe('store-dir','directory to store published.json')
+	.describe('backfill','(not implemented yet!) add all articles from the last n hours on initial load')
 	.alias('subscriptions','s')
 	.alias('password','p')
 	.alias('store-dir','d')
 	.alias('username','u')
+	.alias('backfill','b')
 	.alias('port','P')
 	.argv
 
@@ -51,3 +54,14 @@ exports.password = argv.password
 exports.port = argv.port || process.env.PORT || 8080
 
 exports.argv = argv
+
+
+
+// BACKFILL
+Date.prototype.addHours = function(h) {
+	this.setTime(this.getTime() + (h*60*60*1000))
+	return this
+}
+
+exports.since = new Date()
+exports.since = exports.since.addHours(-argv.backfill)
