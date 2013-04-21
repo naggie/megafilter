@@ -14,11 +14,6 @@ The current article is synchronised across all devices, so you can continue read
 on yor smartphone.
 
 
-
-
-Please let people know about it. I would love for this to become popular. If you have any
-questions please contact me using callan.bryant@gmail.com.
-
 **State: Very beta but working very well!** I have migrated from Google reader to Megafilter.
 
 
@@ -44,6 +39,9 @@ server with `-s subscriptions.xml`. Note that you only need to import once!
 
 You can specify `--password <password>` to require auth. A `--username` can be
 set, but this defaults to the executing user.
+
+
+**KNOWN ISSUE: Some subscriptions.xml files have a different format. This is being fixed: https://github.com/naggie/megafilter/issues/60**
 
 
 By default megafilter will save the published items to
