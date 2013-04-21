@@ -56,6 +56,12 @@ var watch = function (params) {
 	// array of pubdates to unix time, used for calculating update interval
 	var timestamps = []
 
+	// BACKFILL
+	if (params.since)
+		var since = new Date(params.since)
+	else
+		var since = new Date()
+
 	// given articles (etc) see if it's new
 	// if so, and it to the public callback
 	// also ignore the first batch. Real time only.
@@ -66,9 +72,20 @@ var watch = function (params) {
 		articles.reverse()
 
 		articles.forEach( function (article,i) {
+			var timestamp = (new Date(article.pubdate) ).valueOf()
+			// convert to seconds
+			timestamp /= 1000
+			timestamps.push(timestamp)
+
+			// only keep last 20
+			if (timestamps.length > 20)
+				timestamps.shift()
+
+
 			// is this article new? If so, guid is not in known
 			// also do not publish articles on first run
-			if (known.length && known.indexOf(article.guid) == -1) {
+			// OR BACKFILL
+			if (timestamp*1000 > since.valueOf() || known.length && known.indexOf(article.guid) == -1) {
 				// better quality non-proxied link
 				if (article.origlink) {
 					article.link = article.origlink
@@ -88,15 +105,6 @@ var watch = function (params) {
 
 				params.callback(article)
 			}
-
-			var timestamp = (new Date(article.pubdate) ).valueOf()
-			// convert to seconds
-			timestamp /= 1000
-			timestamps.push(timestamp)
-
-			// only keep last 20
-			if (timestamps.length > 20)
-				timestamps.shift()
 		})
 
 		// recalculate interval (if interval was not explicitly set)

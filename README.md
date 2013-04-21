@@ -14,7 +14,8 @@ The current article is synchronised across all devices, so you can continue read
 on yor smartphone.
 
 
-**State: Very beta but working very well!** I have migrated from Google reader to Megafilter.
+**State: Very beta but working very well!** I have migrated from Google reader
+to Megafilter.
 
 
 ![screenshot](http://callanbryant.co.uk/images/megafilter.png)
@@ -45,12 +46,16 @@ By default megafilter will save the published items to
 `~/megafilter-published.json`. You can change this directory with `--store-dir`
 
 
-When running, ~megafilter will wait for new articles. You may have to wait a
-bit! A backfill option will be added.
-
-
 [1]: http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l
 
+
+When megafilter starts, it will check each feed within the first 2 minutes
+(this is so that servers don't get hammered) and after this, each feed will be
+checked at the average post interval. Articles that are posted after the
+initial check are added to the queue, so it may take a while for articles to
+appear. If you are excited and/or impatient like me, then you may use the new
+`--backfill 5` option, to initially add articles that were new in the last 5
+hours. Articles will take 2 minutes to appear.
 
 
 RESTful JSON API
