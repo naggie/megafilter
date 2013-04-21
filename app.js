@@ -162,14 +162,20 @@ fs.readFile(config.subscriptions, function(err, data) {
 		var urls  = []
 
 		for (var i in feeds)
-			urls.push(feeds[i].$.xmlUrl)
+			if (feeds[i].$.xmlUrl)
+				// no categories
+				urls.push(feeds[i].$.xmlUrl)
+			else if (feeds[i].outline) {
+				// this is a category
+				for (var j in feeds[i].outline)
+					urls.push(feeds[i].outline[j].$.xmlUrl)
+			}
 
 		console.log('Watching',urls.length,'feeds')
 
 		aggregator.watchRssFeeds(urls)
 	})
 })
-
 
 // save interval, default 5mins, in seconds
 var saveInterval = config.saveInterval || 60*5
