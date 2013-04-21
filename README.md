@@ -74,7 +74,7 @@ Discard an article from the queue.
 Publish an article by ID from the queue.
 
 > `GET /published`
-Given a `count` as parameter, return published articles. 0 Means all articles, unspecified  means 30.
+Given a `count` as parameter, return published articles. 0 Means all articles, unspecified  means 50.
 
 > `GET /pending`
 Gives the current number of articles pending
@@ -91,7 +91,7 @@ Remotely adds an article to the queue.
 Article format
 --------------
 
-The same as the node-feedparser format.
+The same as the [node-feedparser][3] format.
 
 * `title`
 * `description` (frequently, the full article content)
@@ -109,11 +109,27 @@ The same as the node-feedparser format.
 * `enclosures` (an Array of Objects, each representing a podcast or other enclosure and having a `url` property and possibly `type` and `length` properties)
 * `meta` (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to `article` emissions)
 
+Published articles
+------------------
+
+Currently, megafilter does not create a published RSS feed. If that's needed by
+someone I'll add it. The reason I did not put it is because RSS is not
+cross-domain, and is annoying to parse with jQuery.
+
+The `/published` JSONP feed is simply the latest 50 published articles in the
+format that [node-feedparser][3] produces.
+
+If you want an example on how to integrate the published items, see [my website engine.][8]
+
+I'll probably make this available as part of megafilter.
+
+[8]: https://github.com/naggie/naggie.github.com/blob/master/js/src/engine.js
+
 
 Running without sudo on port 80
 -------------------------------
 
-If you want to host on port 80 under ubuntu on your account, you can install `libcap2-bin` 
+If you want to host on port 80 under ubuntu on your account, you can install `libcap2-bin`
 then run `setcap 'cap_net_bind_service=+ep' /usr/local/bin/node` to give node access to port 80.
 
 Your path to the `node` binary may vary, you can find it with `which node`
