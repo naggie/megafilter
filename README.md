@@ -41,9 +41,6 @@ You can specify `--password <password>` to require auth. A `--username` can be
 set, but this defaults to the executing user.
 
 
-**KNOWN ISSUE: Some subscriptions.xml files have a different format. This is being fixed: https://github.com/naggie/megafilter/issues/60**
-
-
 By default megafilter will save the published items to
 `~/megafilter-published.json`. You can change this directory with `--store-dir`
 
