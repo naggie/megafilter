@@ -36,8 +36,8 @@ questions please contact me using callan.bryant@gmail.com.
 	open http://localhost:8080
 
 The idea is that you run this on your own server. You can specify a PORT via
-the environment variable or `--port`. [Setcap can be used][1] to run from port
-80 without sudo
+the environment variable or `--port`. Setcap can be used to run from port
+80 without sudo; this is documented at the end of this file.
 
 There will be a subscriptions manager soon. For the mean time, always start the
 server with `-s subscriptions.xml`. Note that you only need to import once!
@@ -108,6 +108,16 @@ The same as the node-feedparser format.
 * `source` (an Object containing `url` and `title` properties pointing to the original source for an article; see the [RSS Spec](http://cyber.law.harvard.edu/rss/rss.html#ltsourcegtSubelementOfLtitemgt) for an explanation of this element)
 * `enclosures` (an Array of Objects, each representing a podcast or other enclosure and having a `url` property and possibly `type` and `length` properties)
 * `meta` (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to `article` emissions)
+
+
+Running without sudo on port 80
+-------------------------------
+
+If you want to host on port 80 under ubuntu on your account, you can install `libcap2-bin` 
+then run `setcap 'cap_net_bind_service=+ep' /usr/local/bin/node` to give node access to port 80.
+
+Your path to the `node` binary may vary, you can find it with `which node`
+
 
 Acknowledgements
 ----------------
