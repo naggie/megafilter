@@ -342,14 +342,14 @@ mf.discard = function() {
 		url:'/queue/'+mf.display.article.id,
 		type:'DELETE',
 		error:function() {
-			mf.notification.say('could not delete previous article','exclamation-sign').beep()
+			mf.notification.say('could not delete article','exclamation-sign').beep()
 		},
 		success:function() {
 			mf.notification.say('discarded previous article','ok')
+			mf.load()
 			mf.nav.undo.enable().action(mf.undiscard)
 		}
 	})
-	mf.load()
 }
 
 mf.unpublish = function() {
