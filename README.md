@@ -13,6 +13,7 @@ Destructive actions can be undone (u).
 The current article is synchronised across all devices, so you can continue reading
 on yor smartphone.
 
+It's quite a nice use for your Raspberry Pi.
 
 **State: Very beta but working very well!** I have migrated from Google reader
 to Megafilter.
