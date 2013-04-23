@@ -22,7 +22,7 @@
 		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="main.css">
 		<script src="build.js"></script>
-		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=0.8, maximum-scale=0.8">
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 	</head>
 	<body>
 		<div id="placeholder"></div>
@@ -34,13 +34,13 @@
 
 		</article>
 		<nav>
-			<div id="pending" title="Number of articles waiting in the queue"></div>
 			<ul>
-				<li id="discard"><i class="icon-trash" title="Remove this article from the queue (d)"></i>Discard</li>
-				<li id="inspect"><i class="icon-eye-open" title="View on original website (i)"></i>Inspect</li>
-				<li id="publish"><i class="icon-cloud-upload" title="Publish to star feed (p)"></i>Publish</li>
-				<li id="skip"><i class="icon-double-angle-right" title="Deal with this article later (s)"></i>Skip</li>
-				<li id="undo"><i class="icon-undo" title="Undo last action (u)"></i>Undo</li>
+				<li id="pending" title="Number of articles waiting in the queue"></li>
+				<li class="button" id="discard"><i class="icon-trash" title="Remove this article from the queue (d)"></i>Discard</li>
+				<li class="button" id="inspect"><i class="icon-eye-open" title="View on original website (i)"></i>Inspect</li>
+				<li class="button" id="publish"><i class="icon-cloud-upload" title="Publish to star feed (p)"></i>Publish</li>
+				<li class="button" id="skip"><i class="icon-double-angle-right" title="Deal with this article later (s)"></i>Skip</li>
+				<li class="button" id="undo"><i class="icon-undo" title="Undo last action (u)"></i>Undo</li>
 			</ul>
 		</nav>
 		<div id="loading"><i class="icon-spinner icon-spin"></i></div>

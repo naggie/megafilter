@@ -14,7 +14,8 @@ article {
 	box-shadow:2px 2px 1px gray;
 	background:white;
 }
-article img,article iframe{
+
+article img,article iframe {
 	max-width:100%;
 	height:inherit;
 	text-align:center;
@@ -54,7 +55,7 @@ nav li {
 	padding:10px 0 10px 0;
 	height:55px;
 }
-nav li:hover, .depressed {
+nav .button:hover, .depressed {
 	background:#333;
 }
 nav i {
@@ -62,19 +63,17 @@ nav i {
 	display:block!important;
 	margin:auto;
 }
-nav li:active , .depressed {
+nav .button:active , .depressed {
 	position:relative;
 	top:1px;
 }
 nav #pending {
 	font-size:36px;
-	margin-top:30px;
-	height:55px;
 }
 nav li.disabled {
 	opacity:0.30;
 }
-nav li.disabled:active, nav li.disabled:hover {
+nav .disabled:active, nav .disabled:hover {
 	position:inherit;
 	background:inherit;
 }
@@ -134,4 +133,35 @@ a > img, .blog a[rel="nofollow"] img,.blog img[height="1"],.blog img[border="0"]
 a:active,a:focus {
 	outline:none;
 	ie-dummy:expression(this.hideFocus=true);
+}
+
+.vertical article {
+	margin:40px 10px 170px 10px;
+}
+
+.vertical nav {
+	position:fixed;
+	right:0;
+	left:0;
+	bottom:0;
+	top:inherit;
+	width:100%;
+}
+
+.vertical nav li {
+	list-style-type:none;
+	margin:0 20px 0 20px;
+	padding:20px 10px 0 10px;
+	height:55px;
+	width:55px;
+	display:inline-block;
+}
+
+.vertical #loading, .vertical #placeholder {
+	margin:0;
+}
+
+.vertical #pending {
+	position:relative;
+	top:-8px;
 }

@@ -64,6 +64,10 @@ mf.init = function() {
 	setInterval(mf.check_pending,5000)
 
 	mf.notification = new mf.controllers.notification('#notification')
+
+	// MOAR responsiveness!
+	mf.orient()
+	window.onresize = mf.orient
 }
 
 mf.controllers = {}
@@ -414,4 +418,18 @@ mf.check_pending = function () {
 			mf.notification.say('network error','warning-sign')
 		}
 	})
+}
+
+// choose between vertical and horizontal orientation
+mf.vertical = false
+mf.orient = function() {
+	if ( $(window).height() > $(window).width() ) {
+		if (mf.vertical) return
+		$('body').addClass('vertical')
+		mf.vertical = true
+	} else {
+		if (!mf.vertical) return
+		$('body').removeClass('vertical')
+		mf.vertical = false
+	}
 }
