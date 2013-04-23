@@ -15,72 +15,74 @@
 */
 
 
-// must accept config somehow else FIXME
-config = require('../config')
+exports.aggregator = function(config) {
+	var exports = {}
+	// TODO: article validator
+	// TODO: may have to change to async with callbacks (store only)
+	// so that redis and sqlite (async) can be implemented
 
-// TODO: article validator
-// TODO: may have to change to async with callbacks (store only)
-// so that redis and sqlite (async) can be implemented
+	// load chosen actors
+	queue  = require('./articleQueue').internal()
+	store  = require('./articleStore')[config.store.actor](config.store)
 
-// load chosen actors
-queue  = require('./articleQueue').internal(config)
-store  = require('./articleStore')[config.store.actor](config.store)
-
-exports.importer = require('./importer')
-exports.importer.store = store // hack: FIXME
-
-
-watcher = require('./rss-watcher')
+	exports.importer = require('./importer')
+	exports.importer.store = store // hack: FIXME
 
 
-exports.watchRssFeeds = function(urls) {
-	urls.forEach(function(url){
-		watcher.watch({
-			url:url,
-			callback:function(article) {
-				exports.enqueue(article)
-				exports.hooks.enqueue(article)
-			},
-			since: config.since
+	watcher = require('./rss-watcher')
+
+
+	exports.watchRssFeeds = function(urls) {
+		urls.forEach(function(url){
+			watcher.watch({
+				url:url,
+				callback:function(article) {
+					exports.enqueue(article)
+					exports.hooks.enqueue(article)
+				},
+				since: config.since
+			})
 		})
-	})
+	}
+
+	exports.hooks = {}
+	exports.hooks.enqueue = function(article){}
+	exports.hooks.publish = function(article){}
+
+	exports.next    = function() {
+		var article = queue.next()
+		if (article)
+			article.pending = queue.pending()
+		return article
+	}
+
+	exports.current = function() {
+		var article = queue.current()
+		if (article)
+			article.pending = queue.pending()
+		return article
+	}
+
+	exports.discard = function(id) {
+		return queue.discard(id)
+	}
+
+	exports.publish = function(id) {
+		var article = queue.get(id)
+		if (article) {
+			exports.hooks.publish(article)
+			return !!store.insert(article)
+		} else
+			return false
+	}
+
+	exports.enqueue   = queue.enqueue
+	exports.dump      = store.dump
+	exports.pending   = queue.pending
+	exports.unpublish = store.discard
+	exports.store     = store
+	exports.queue     = queue
+	exports.articleHash = require('./articleQueue').articleHash
+
+	return exports
 }
-
-exports.hooks = {}
-exports.hooks.enqueue = function(article){}
-exports.hooks.publish = function(article){}
-
-exports.next    = function() {
-	var article = queue.next()
-	if (article)
-		article.pending = queue.pending()
-	return article
-}
-
-exports.current = function() {
-	var article = queue.current()
-	if (article)
-		article.pending = queue.pending()
-	return article
-}
-
-exports.discard = function(id) {
-	return queue.discard(id)
-}
-
-exports.publish = function(id) {
-	var article = queue.get(id)
-	if (article) {
-		exports.hooks.publish(article)
-		return !!store.insert(article)
-	} else
-		return false
-}
-
-exports.enqueue   = queue.enqueue
-exports.dump      = store.dump
-exports.pending   = queue.pending
-exports.unpublish = store.discard
-exports.store     = store
-exports.queue     = queue
-exports.articleHash = require('./articleQueue').articleHash

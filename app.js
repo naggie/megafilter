@@ -20,7 +20,7 @@ var restify  = require('restify')
 var xml2js   = require('xml2js')
 var fs       = require('fs')
 
-var aggregator = require('./aggregator')
+var aggregator = require('./aggregator').aggregator(config)
 var importer   = aggregator.importer
 
 

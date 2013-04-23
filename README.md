@@ -3,12 +3,12 @@ This is a personal replacement for Google reader. It's simple and suits my workf
 Articles are added to a circular FIFO queue, so that the latest articles always appear
 next. Articles can be:
 
-* **Skipped** to be viewed later
-* **Published** to a JSONP 'RSS' feed
-* **Discarded** from the queue
-* **Inspected** to view the article from the original website, with comments
+* **Skipped** (s) to be viewed later
+* **Published** (p) to a JSONP 'RSS' feed
+* **Discarded** (d) from the queue
+* **Inspected** (i) to view the article from the original website, with comments
 
-Destructive actions can be undone.
+Destructive actions can be undone (u).
 
 The current article is synchronised across all devices, so you can continue reading
 on yor smartphone.
