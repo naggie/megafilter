@@ -30,12 +30,13 @@ var json  = function (params) {
 	// articles saved
 	var articles = []
 
-	// change since last write?
-	var changed = false
-
 	// load starred items JSON file
 	if (fs.existsSync(file))
 		articles = JSON.parse( fs.readFileSync(file,{encoding:'utf8'}) )
+
+	// timeout to save (reset on insert)
+	// deferred save
+	var saveTimeout
 
 	// save an article, in order based on pubdate
 	this.insert = function(article) {
@@ -62,7 +63,12 @@ var json  = function (params) {
 		if (pubdate < (new Date(articles[articles.length-1].pubdate)))
 			articles.push(article)
 
-		return changed = true
+		// schedule a save, possibly cancelling previously scheduled one
+		// this way if save is hammered during import, they don't queue up.
+		clearTimeout(saveTimeout)
+		saveTimeout = setTimeout(this.save,2000)
+
+		return true
 	}
 
 	// dump n latest articles (0 for all)
@@ -84,14 +90,11 @@ var json  = function (params) {
 	// write to disk
 	this.save = function(callback) {
 		if (!arguments[0]) callback = function(){}
-		if (!changed) return callback()
-
-		changed = false;
 
 		var json = JSON.stringify(articles)
 		fs.writeFile(file,json,{encoding:'utf8'},function(err) {
 			if (err) console.err(err)
-			console.log('Saved '+articles.length+' starred items')
+			console.log('Saved '+articles.length+' published items')
 			callback()
 		})
 	}
