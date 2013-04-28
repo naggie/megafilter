@@ -16,7 +16,8 @@ on yor smartphone.
 It's quite a nice use for your Raspberry Pi.
 
 **State: Very beta but working very well!** I have migrated from Google reader
-to Megafilter. **Patches welcome!**
+to Megafilter. **Patches welcome!** to produce a starred items feed. My copy
+publishes to <http://callanbryant.co.uk/#Recommended>
 
 
 ![screenshot](http://callanbryant.co.uk/images/megafilter.png)
