@@ -146,6 +146,10 @@ To the megafilter command, where `<name>` is the filename of a css file in
 `public/themes/`. Currently, the two themes available are `default` and `lime`.
 Many thanks to @dvbportal for developing the lime theme.
 
+Here is the lime theme, which is responsive so that it adjusts to your device:
+
+![screenshot](https://github.com/naggie/megafilter/raw/master/screenshots/lime.png)
+
 
 If you are switching themes, you may need to do a refresh to clear the cache.
 It is CTRL+SHIFT+R on Chrome.
