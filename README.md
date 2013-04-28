@@ -147,6 +147,10 @@ To the megafilter command, where `<name>` is the filename of a css file in
 Many thanks to @dvbportal for developing the lime theme.
 
 
+If you are switching themes, you may need to do a refresh to clear the cache.
+It is CTRL+SHIFT+R on Chrome.
+
+
 Acknowledgements
 ----------------
 
