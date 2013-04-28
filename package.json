@@ -7,7 +7,7 @@
     "rss",
     "aggregator"
   ],
-  "version": "0.5.2",
+  "version": "0.5.2-1",
   "author": "Callan Bryant <callan.bryant@gmail.com> (http://callanbryant.co.uk/)",
   "scripts": {
     "start": "node app"
