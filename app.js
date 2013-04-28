@@ -22,7 +22,7 @@ var fs       = require('fs')
 
 // used just for dynamic theming
 var static  = require('node-static')
-var fileServer = new static.Server('./public/')
+var fileServer = new static.Server(__dirname+'/public/')
 
 var aggregator = require('./aggregator').aggregator(config)
 var importer   = aggregator.importer
