@@ -20,6 +20,10 @@ var restify  = require('restify')
 var xml2js   = require('xml2js')
 var fs       = require('fs')
 
+// used just for dynamic theming
+var static  = require('node-static')
+var fileServer = new static.Server('./public/')
+
 var aggregator = require('./aggregator').aggregator(config)
 var importer   = aggregator.importer
 
@@ -118,6 +122,10 @@ server.post('/enqueue',function(req,res,next) {
 	var success = aggregator.enqueue(req.body)
 	res.send(success?200:500,{success:success})
 	return next()
+})
+
+server.get('/style',function(req,res,next) {
+	fileServer.serveFile('themes/'+config.theme+'.css', 200, {}, req, res)
 })
 
 // any other request, for static things

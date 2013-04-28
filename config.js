@@ -6,7 +6,8 @@ var argv = require('optimist')
 		port : 8080,
 		//subscriptions : 'subscriptions.xml'
 		'store-dir' : process.cwd(),
-		'backfill'  : 0,
+		backfill  : 0,
+		theme : 'default'
 	})
 	.demand(['subscriptions'])
 	.describe('subscriptions','Google reader exported subscriptions.xml file')
@@ -16,12 +17,14 @@ var argv = require('optimist')
 	.describe('import-greader-starred','import you starred google reader items to published feed')
 	.describe('store-dir','directory to store published.json')
 	.describe('backfill','add all articles')
+	.describe('theme','CSS style filename from public/themes/ without extension')
 	.alias('subscriptions','s')
 	.alias('password','p')
 	.alias('store-dir','d')
 	.alias('username','u')
 	.alias('backfill','b')
 	.alias('port','P')
+	.alias('theme','t')
 	.argv
 
 
@@ -65,3 +68,7 @@ Date.prototype.addHours = function(h) {
 
 exports.since = new Date()
 exports.since = exports.since.addHours(-argv.backfill)
+
+
+
+exports.theme = argv.theme
