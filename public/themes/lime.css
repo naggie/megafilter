@@ -1,18 +1,16 @@
 body {
-	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-	text-align:center;
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 	overflow-y: scroll; /*no jerking caused by hiding scrollbar*/
-	background:#ddd;
+	background: rgb(245,244,241);
 }
+
 article {
 	visibility:hidden;
-	display:inline-block;
-	text-align:left;
-	margin:40px 100px 40px 20px;
-	max-width:800px;
-	padding:30px;
-	box-shadow:2px 2px 1px gray;
-	background:white;
+	margin: auto;
+	padding: 30px 8px 8px 88px;
+	background:rgb(245,244,241);
+	line-height: 1.7em;
+	color: #333;
 }
 article img,article iframe{
 	max-width:100%;
@@ -23,15 +21,17 @@ article img,article iframe{
 	margin:40px auto;
 }
 
+h1 { line-height: 1.5em; }
+
 article iframe {
 	height:450px; /*16:9 video*/
 }
 
 nav {
 	position:fixed;
-	right:0;
-	width:80px;
-	background:black;
+	left:0;
+	width:60px;
+	background:#555;
 	color:white;
 	top:0;
 	bottom:0;
@@ -50,8 +50,7 @@ nav ul {
 }
 nav li {
 	list-style-type:none;
-	margin:20px 0 40% 0;
-	padding:10px 0 10px 0;
+	margin:10px 0 0 0;
 	height:55px;
 }
 nav li:hover, .depressed {
@@ -134,4 +133,43 @@ a > img, .blog a[rel="nofollow"] img,.blog img[height="1"],.blog img[border="0"]
 a:active,a:focus {
 	outline:none;
 	ie-dummy:expression(this.hideFocus=true);
+}
+
+@media only screen and (min-width: 480px) {
+  article {
+    max-width: 460px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  article {
+    max-width: 650px;
+  }
+  nav {
+    width: 80px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  body {
+    font-size: 1.1em;
+  }
+  article {
+    max-width: 700px;
+  }
+  nav {
+    width: 80px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  body {
+    font-size: 1.4em;
+  }
+  article {
+    max-width: 800px;
+  }
+  nav {
+    width: 100px;
+  }
 }

@@ -136,6 +136,17 @@ then run `setcap 'cap_net_bind_service=+ep' /usr/local/bin/node` to give node ac
 Your path to the `node` binary may vary, you can find it with `which node`
 
 
+Theming
+-------
+Since v0.5.1 (global) theming is supported! To use theming, add:
+
+	--theme <name>
+
+To the megafilter command, where `<name>` is the filename of a css file in
+`public/themes/`. Currently, the two themes available are `default` and `lime`.
+Many thanks to @dvbportal for developing the lime theme.
+
+
 Acknowledgements
 ----------------
 
@@ -146,9 +157,12 @@ Megafilter would not have been possible without the following awesome projects:
   * [Font Awesome][5]: used for the UI graphics
   * [jQuery][6]
   * [node restify][7]: Used for the RESTful JSON API, and UI serving
+  * [node static][7]: Used to implement serving `/style` dynamically
 
 [3]: https://github.com/danmactough/node-feedparser
 [4]: https://github.com/jeresig/jquery.hotkeys
 [5]: http://fortawesome.github.io/Font-Awesome/
 [6]: http://jquery.com
 [7]: http://mcavage.github.io/node-restify/
+[9]: https://github.com/naggie/megafilter/issues/63
+[10]: https://github.com/cloudhead/node-static
