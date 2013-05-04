@@ -72,7 +72,7 @@ var internal = function (params) {
 
 
 	// remove an article from the queue, preserving the order
-	this.discard = function(id){
+	this.discard = function(id) {
 		// look for the article index, given the ID
 		// 'i' is set to invalid index if not found
 		for (var i=0; i <= articles.length; i++)
@@ -83,7 +83,7 @@ var internal = function (params) {
 		if (index && i <= index)
 			index--
 		else
-			index = index.length-1
+			index = articles.length-1
 
 		// remove the article, returning success
 		return !!articles.splice(i,1)[0]
