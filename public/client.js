@@ -318,6 +318,9 @@ mf.load = mf.skip = function() {
 }
 
 mf.publish = function() {
+	// wouldn't ever want to publish an article twice
+	mf.nav.skip.disable()
+
 	$.ajax({
 		url:'/publish/'+mf.display.article.id,
 		type:'PUT',
@@ -334,6 +337,9 @@ mf.publish = function() {
 }
 
 mf.discard = function() {
+	// request is pending, slow connection may cause user to try again. Do not want.
+	mf.nav.discard.disable()
+
 	// clone old article to trash
 	mf.trash = $.extend({},mf.display.article)
 
