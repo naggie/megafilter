@@ -319,7 +319,7 @@ mf.load = mf.skip = function() {
 
 mf.publish = function() {
 	// wouldn't ever want to publish an article twice
-	mf.nav.skip.disable()
+	mf.nav.publish.disable()
 
 	$.ajax({
 		url:'/publish/'+mf.display.article.id,
