@@ -1,3 +1,7 @@
+**DEVELOPMENT PAUSED, I HAVE EXAMS. SORRY.**
+
+
+
 This is a personal replacement for Google reader. It's simple and suits my workflow.
 
 Articles are added to a circular FIFO queue, so that the latest articles always appear
