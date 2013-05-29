@@ -1,4 +1,4 @@
-**DEVELOPMENT PAUSED, I HAVE EXAMS. SORRY.**
+**DEVELOPMENT PAUSED, I HAVE EXAMS. SORRY.** However, I will merge pull requests!
 
 
 
