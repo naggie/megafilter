@@ -280,6 +280,8 @@ mf.load = mf.skip = function() {
 	// remove article, show loading animation
 	mf.display.wait()
 
+	mf.notification.say('Loading next article...','spinner icon-spin').persist()
+
 	// article operations not valid during loading
 	mf.nav.discard.disable()
 	mf.nav.publish.disable()
@@ -321,6 +323,8 @@ mf.publish = function() {
 	// wouldn't ever want to publish an article twice
 	mf.nav.publish.disable()
 
+	mf.notification.say('Publishing article...','spinner icon-spin').persist()
+
 	$.ajax({
 		url:'/publish/'+mf.display.article.id,
 		type:'PUT',
@@ -339,6 +343,8 @@ mf.publish = function() {
 mf.discard = function() {
 	// request is pending, slow connection may cause user to try again. Do not want.
 	mf.nav.discard.disable()
+
+	mf.notification.say('Discarding article...','spinner icon-spin').persist()
 
 	// clone old article to trash
 	mf.trash = $.extend({},mf.display.article)
