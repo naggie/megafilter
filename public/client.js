@@ -268,6 +268,10 @@ mf.controllers.notification = function(selector) {
 		return this
 	}
 
+	// discards current message and icon
+	this.clear = function() {
+		ele.empty()
+	}
 }
 
 // last deleted or published article (MUST BE A CLONE)
@@ -280,7 +284,7 @@ mf.load = mf.skip = function() {
 	// remove article, show loading animation
 	mf.display.wait()
 
-	mf.notification.say('Loading next article...','spinner icon-spin').persist()
+	mf.notification.say('loading next article...','spinner icon-spin').persist()
 
 	// article operations not valid during loading
 	mf.nav.discard.disable()
@@ -313,6 +317,8 @@ mf.load = mf.skip = function() {
 			mf.nav.discard.enable()
 			mf.nav.publish.enable()
 			mf.nav.inspect.enable()
+
+			mf.notification.clear()
 		}
 
 
@@ -323,7 +329,7 @@ mf.publish = function() {
 	// wouldn't ever want to publish an article twice
 	mf.nav.publish.disable()
 
-	mf.notification.say('Publishing article...','spinner icon-spin').persist()
+	mf.notification.say('publishing article...','spinner icon-spin').persist()
 
 	$.ajax({
 		url:'/publish/'+mf.display.article.id,
@@ -344,7 +350,7 @@ mf.discard = function() {
 	// request is pending, slow connection may cause user to try again. Do not want.
 	mf.nav.discard.disable()
 
-	mf.notification.say('Discarding article...','spinner icon-spin').persist()
+	mf.notification.say('discarding article...','spinner icon-spin').persist()
 
 	// clone old article to trash
 	mf.trash = $.extend({},mf.display.article)
