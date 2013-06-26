@@ -271,6 +271,8 @@ mf.controllers.notification = function(selector) {
 	// discards current message and icon
 	this.clear = function() {
 		ele.empty()
+
+		return this
 	}
 }
 
@@ -284,7 +286,7 @@ mf.load = mf.skip = function() {
 	// remove article, show loading animation
 	mf.display.wait()
 
-	mf.notification.say('loading next article...','spinner icon-spin').persist()
+	//mf.notification.say('loading next article...','spinner icon-spin').persist()
 
 	// article operations not valid during loading
 	mf.nav.discard.disable()
