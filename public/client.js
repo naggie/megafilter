@@ -319,8 +319,6 @@ mf.load = mf.skip = function() {
 			mf.nav.discard.enable()
 			mf.nav.publish.enable()
 			mf.nav.inspect.enable()
-
-			mf.notification.clear()
 		}
 
 
