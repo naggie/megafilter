@@ -179,3 +179,5 @@ Megafilter would not have been possible without the following awesome projects:
 [7]: http://mcavage.github.io/node-restify/
 [9]: https://github.com/naggie/megafilter/issues/63
 [10]: https://github.com/cloudhead/node-static
+
+[Donate on gittip to support megafilter, if you like. Thanks!](https://www.gittip.com/naggie/)
