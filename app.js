@@ -137,7 +137,7 @@ server.get(/.*/,restify.serveStatic({
 }))
 
 
-server.listen(config.port, function () {
+server.listen(config.port,config.host, function () {
 	console.log('%s listening at %s', server.name, server.url)
 })
 

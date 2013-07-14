@@ -4,6 +4,7 @@ var argv = require('optimist')
 	.default({
 		user : process.env.USER,
 		port : 8080,
+		host : '0.0.0.0',
 		//subscriptions : 'subscriptions.xml'
 		'store-dir' : process.cwd(),
 		backfill  : 0,
@@ -13,6 +14,7 @@ var argv = require('optimist')
 	.describe('subscriptions','Google reader exported subscriptions.xml file')
 	.describe('password','setting a password will enable authentication')
 	.describe('port','port to listen on')
+	.describe('host','host IP to listen on')
 	.describe('username','username for auth, defaults to current user')
 	.describe('import-greader-starred','import you starred google reader items to published feed')
 	.describe('store-dir','directory to store published.json')
@@ -25,6 +27,7 @@ var argv = require('optimist')
 	.alias('backfill','b')
 	.alias('port','P')
 	.alias('theme','t')
+	.alias('host','h')
 	.argv
 
 
