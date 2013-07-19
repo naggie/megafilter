@@ -66,7 +66,12 @@ var watch = function (params) {
 	// if so, and it to the public callback
 	// also ignore the first batch. Real time only.
 	var inspect = function(error,meta,articles) {
-		if (error) return console.error(params.url,error)
+		if (error) {
+			console.error(params.url,error)
+			// try again way later
+			setTimeout(function() { parser.parseUrl(params.url,inspect) },interval.max)
+			return
+		}
 
 		// oldest first is required to publish in correct order
 		articles.reverse()
